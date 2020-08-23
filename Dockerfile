@@ -59,6 +59,7 @@ RUN sudo apt update && sudo apt install -q -y \
 
 RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
+RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/ros-latest.list
 RUN echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -sc` main" | sudo tee /etc/apt/sources.list.d/ros2-latest.list
 RUN sudo apt update 
 RUN sudo apt install ros-$ROS1_DISTRO-ros-base -y
