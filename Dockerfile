@@ -12,6 +12,8 @@ ARG UID=1000
 ARG GID=1000
 ARG PW=docker
 ARG TIMEZONE=Asia/Singapore
+ARG ROS1_DISTRO="noetic"
+ARG ROS2_DISTRO="foxy"
 
 RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | \
       chpasswd
@@ -45,6 +47,24 @@ RUN mkdir -p /home/$USER/repos && \
 
 # Build everything
 RUN /home/$USER/repos/software-toolbox/setup/dev-install
+
+# Install ROS2, ROS1 and Gazebo
+RUN sudo apt update && sudo apt install -q -y \
+    bash-completion \
+    dirmngr \
+    gnupg2 \
+    lsb-release \
+    python3-pip \
+    && sudo rm -rf /var/lib/apt/lists/*
+
+RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+RUN echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -sc` main" | sudo tee /etc/apt/sources.list.d/ros2-latest.list
+RUN sudo apt update 
+RUN sudo apt install ros-$ROS1_DISTRO-ros-base -y
+RUN sudo apt install ros-$ROS2_DISTRO-ros-base -y
+
+RUN wget https://raw.githubusercontent.com/ignition-tooling/release-tools/master/one-line-installations/gazebo.sh -O $HOME/gazebo.sh && chmod +x $HOME/gazebo.sh && $HOME/gazebo.sh && rm $HOME/gazebo.sh
 
 # Set Entrypoint Script
 COPY sandbox-entrypoint.sh /usr/local/bin
