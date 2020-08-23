@@ -56,7 +56,7 @@ yes | $HOME/.fzf/install
 
 # Install CCLS
 [ -d "$HOME/ccls" ] && yes | rm -r $HOME/ccls
-git clone --depth=1 --recursive https://github.com/MaskRay/ccls $HOME
+git clone --depth=1 --recursive https://github.com/MaskRay/ccls $HOME/ccls
 cd $HOME/ccls
 cmake -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/bin
 cmake --build Release
