@@ -7,6 +7,7 @@ tmux select-pane -t $session:git-pane.0
 
 tmux split-pane -t $session:git-pane.0 -h
 tmux split-pane -t $session:git-pane.1 -v
+tmux resize-pane -t $session:git-pane.0 -x 80
 
 tmux send -t $session:git-pane.0 "git config color.status always && clear" ENTER
 
