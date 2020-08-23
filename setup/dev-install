@@ -34,34 +34,35 @@ sudo apt update
 
 # Install CGDB
 sudo apt install texinfo flex libreadline-dev -y
-git clone git://github.com/cgdb/cgdb.git ~/cgdb
-cd ~/cgdb
+git clone git://github.com/cgdb/cgdb.git $HOME/cgdb
+cd $HOME/cgdb
 ./autogen.sh
 ./configure --prefix=/usr/local
 make
 sudo make install
-rm -r ~/cgdb
+cd $HOME
+rm -r $HOME/cgdb
 
 
 # Install ripgrep
-curl -L https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb -o ~/rg.deb
-sudo dpkg -i ~/rg.deb
-rm ~/rg.deb
+curl -L https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb -o $HOME/rg.deb
+sudo dpkg -i $HOME/rg.deb
+rm $HOME/rg.deb
 
 # Install FZF
 [ -d "$HOME/.fzf" ] && yes | rm -r $HOME/.fzf 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-yes | ~/.fzf/install
+git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+yes | $HOME/.fzf/install
 
 # Install CCLS
-[ -d "$HOME/ccls" ] && yes | rm -r ~/ccls
-git clone --depth=1 --recursive https://github.com/MaskRay/ccls ~/ccls
-cd ~/ccls
+[ -d "$HOME/ccls" ] && yes | rm -r $HOME/ccls
+git clone --depth=1 --recursive https://github.com/MaskRay/ccls $HOME
+cd $HOME/ccls
 cmake -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/bin
 cmake --build Release
 sudo cmake --build Release --target install
-cd ~ 
-yes | rm -r ~/ccls
+cd $HOME 
+yes | rm -r $HOME/ccls
 
 $SCRIPT_DIR/node-install
 $SCRIPT_DIR/vim-install

@@ -8,7 +8,7 @@ sudo apt update
 
 sudo apt install tmux -y
 [ -d "$HOME/.tmux" ] && yes | rm -r $HOME/.tmux
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 cp $DOTFILES_DIR/.tmux.conf $HOME
 

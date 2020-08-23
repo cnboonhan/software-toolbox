@@ -21,7 +21,7 @@ sudo -H pip3 install pynvim
 
 # Vim-Plug for plugin management
 [ -d "$HOME/.vim" ] && yes | rm -r $HOME/.vim
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 echo "vim-plug complete"
 
@@ -34,11 +34,11 @@ echo "vim plugins complete"
 echo "Installing coc.nvim extensions"
 $SCRIPT_DIR/node-install
 
-mkdir -p ~/.vim/pack/coc/start
-cd ~/.vim/pack/coc/start
+mkdir -p $HOME/.vim/pack/coc/start
+cd $HOME/.vim/pack/coc/start
 curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzfv -
-mkdir -p ~/.config/coc/extensions
-cd ~/.config/coc/extensions
+mkdir -p $HOME/.config/coc/extensions
+cd $HOME/.config/coc/extensions
 if [ ! -f package.json ]
 then
     echo '{"dependencies":{}}'> package.json
