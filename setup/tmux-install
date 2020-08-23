@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DOTFILES_DIR=$SCRIPT_DIR/../dotfiles
+
+echo "Installing tmux"
+sudo apt update 
+
+sudo apt install tmux -y
+[ -d "$HOME/.tmux" ] && yes | rm -r $HOME/.tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+cp $DOTFILES_DIR/.tmux.conf $HOME
+
+# For bash completion
+curl https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux | sudo tee -a /usr/share/bash-completion/completions/tmux

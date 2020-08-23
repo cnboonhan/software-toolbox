@@ -1,0 +1,34 @@
+" Temporary vimrc to install plugins without causing errors
+""" SETTINGS 
+let mapleader=","
+set hidden  "  Hides buffers instead of closing them
+set wildmenu " An navigable menu will appear on entering <Tab> after :command
+set wildmode=longest:full,full " Choice of displaying autocomplete after :command
+set mouse=a " Allows point and click 
+filetype plugin indent on " Enable filetype detection, ftplugins and indent scripts
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent " Formatting settings
+set incsearch ignorecase smartcase hlsearch " Search settings
+set wrap breakindent " Wrapping text will be indented properly
+set encoding=utf-8
+set relativenumber
+set clipboard=unnamedplus " Use the system clipboard for yanking
+map Q <Nop>
+
+""" PLUGINS 
+call plug#begin()
+Plug 'scrooloose/nerdtree'
+Plug 'kassio/neoterm'
+Plug 'easymotion/vim-easymotion'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'morhetz/gruvbox'
+Plug 'puremourning/vimspector'
+call plug#end()
+

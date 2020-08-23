@@ -1,0 +1,26 @@
+#!/bin/bash
+# Configure GRUB to boot in console mode instead of GUI
+
+set -e 
+
+sudo apt install vim -y
+sudo apt install grub2-common -y
+sudo apt install resolvconf -y
+
+sudo touch /etc/default/grub
+sudo sh -c 'echo "GRUB_CMDLINE_LINUX_DEFAULT=text" >> /etc/default/grub'
+sudo sh -c 'echo "GRUB_TERMINAL=console" >> /etc/default/grub'
+
+# Edit the following if duplicates are found
+sudoedit /etc/default/grub
+
+sudo update-grub
+
+sudo systemctl enable multi-user.target --force
+sudo systemctl set-default multi-user.target
+
+
+# https://askubuntu.com/questions/859630/how-to-start-ubuntu-in-console-mode
+# to re-enable
+# sudo systemctl enable graphical.target --force
+# sudo systemctl set-default graphical.target 

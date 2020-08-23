@@ -1,0 +1,49 @@
+#!/bin/bash
+session=monitor
+tmux new-session -d -s $session || exit
+
+tmux rename-window -t $session:0 main
+tmux select-pane -t $session:main.0
+
+tmux new-window -t $session:1 -n "htop" 
+tmux send -t $session:htop.0 'htop' ENTER
+
+tmux new-window -t $session:2 -n "iftop"
+tmux send -t $session:iftop.0 'iftop' ENTER
+
+tmux new-window -t $session:3 -n "wavemon"
+tmux send -t $session:wavemon.0 'wavemon' ENTER
+
+tmux new-window -t $session:4 -n "ipa"
+tmux send -t $session:ipa.0 'watch ip a' ENTER
+
+tmux new-window -t $session:5 -n "iproute"
+tmux send -t $session:iproute.0 'watch ip route' ENTER
+
+if [ -z "$1" ]
+  then
+    tmux new-window -t $session:6 -n "tshark"
+    tmux send -t $session:tshark.0 'tshark' ENTER
+  else
+    tmux new-window -t $session:6 -n "tshark"
+    tmux send -t $session:tshark.0 "tshark -i $1" ENTER
+fi
+
+tmux new-window -t $session:7 -n "nload"
+tmux send -t $session:nload.0 "nload $1" ENTER
+
+tmux new-window -t $session:8 -n "lsof"
+tmux send -t $session:lsof.0 'watch lsof -i' ENTER
+
+tmux new-window -t $session:9 -n "free"
+tmux send -t $session:free.0 'watch free -m' ENTER
+
+tmux new-window -t $session:10 -n "dmesg"
+tmux send -t $session:dmesg.0 'dmesg -w' ENTER
+
+if [[ ! "$TMUX" ]]; then
+  tmux attach-session -t $session:htop.0
+else
+  tmux switch -t $session:htop.0
+fi
+

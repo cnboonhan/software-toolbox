@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -e 
+
+sudo apt install isc-dhcp-server -y
+sudo apt install xclip -y
+echo  "Editing /etc/default/isc-dhcp-server and /etc/dhcp/dhcpd.conf.."
+echo "Copying template dhcp config to clipboard..You can paste it in dhcpd.conf"
+echo "Remember to set your interfaces in isc-dhcp-server"
+sleep 1
+
+echo "
+authoritative;
+
+subnet 10.233.0.0 netmask 255.255.255.0 {
+  range 10.233.0.2 10.233.0.10;
+  # range 10.233.0.11 10.233.0.20;
+  
+  option routers             10.233.0.1; # Set this to the same ip as the dhcp device, as specified in netplan / NetworkManager
+  option subnet-mask         255.255.255.0;
+
+  # option domain-search       'cisco.com';
+  # host router {
+  #   hardware ethernet bc:30:d9:2a:c9:50;
+  #   fixed-address 10.233.0.1;
+  # }
+
+  option domain-name-servers 8.8.8.8;
+}
+" | xclip -sel c
+
+sudo vim /etc/default/isc-dhcp-server /etc/dhcp/dhcpd.conf
+
+sudo systemctl enable isc-dhcp-server.service
+journalctl -u isc-dhcp-server.service
+
+cat var/lib/dhcp/dhcpd.leases

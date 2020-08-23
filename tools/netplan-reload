@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+sudoedit /etc/netplan/*
+echo "Reloading Netplan.."
+sudo netplan generate --debug
+sudo netplan apply
+sudo systemctl daemon-reload
+echo "Unblocking wireless devices.."
+rfkill unblock all
+watch ip a

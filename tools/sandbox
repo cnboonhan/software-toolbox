@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function sandbox-helper()
+{
+  [ ! -z $(docker images -q cnboonhan/software-toolbox-env) ] || ( echo "please pull docker image: docker pull cnboonhan/software-toolbox-env, or build software-toolbox-env first: 'docker build -t cnboonhan/software-toolbox-env [software-toolbox PATH]'" && return )
+
+  if [ -z "$1" ]
+  then
+    docker run -it --rm -w /home/ubuntu/isolation/${PWD##*/} --cap-add net_raw --cap-add net_admin --net=bridge --volume $(pwd)/..:/home/ubuntu/isolation/ --hostname sandbox cnboonhan/software-toolbox-env /bin/bash
+  else
+    docker run -it --rm -w /home/ubuntu/isolation/${PWD##*/} --cap-add net_raw --cap-add net_admin --net=bridge --volume $(pwd)/..:/home/ubuntu/isolation/ --hostname sandbox cnboonhan/software-toolbox-env /bin/bash -c $1
+  fi
+
+  echo "Restore directory to initial state? Y/y (Automatic 'No' in 1 second)"
+  read -t 1 yn
+
+  case $yn in
+    [Yy]* ) git restore --source=HEAD --staged --worktree -- $(pwd) ; git clean -fd $(pwd);;
+        * ) return;;
+  esac > /dev/null 2>&1
+}
+
+export -f sandbox-helper
+
+gnome-terminal -- bash -c "sandbox-helper $1; exec bash"

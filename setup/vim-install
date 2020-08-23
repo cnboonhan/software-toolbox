@@ -1,0 +1,56 @@
+#!/bin/bash
+set -e
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DOTFILES_DIR=$SCRIPT_DIR/../dotfiles
+
+echo "vim installation"
+sudo apt update 
+
+echo "adding ppas and update"
+sudo add-apt-repository ppa:jonathonf/vim -y
+sudo apt update 
+
+echo "installing apt binaries"
+sudo apt install vim -y
+sudo apt install vim-gtk -y
+sudo apt install default-jdk -y
+echo "apt installation complete"
+
+echo "installing pip binaries"
+sudo -H pip3 install pynvim
+
+# Vim-Plug for plugin management
+[ -d "$HOME/.vim" ] && yes | rm -r $HOME/.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+echo "vim-plug complete"
+
+echo "installing vim plugins"
+cp $SCRIPT_DIR/../dotfiles/.minimal_vimrc $HOME/.vimrc
+/usr/bin/vim -c ':PlugInstall' -c ':qall'
+cp $SCRIPT_DIR/../dotfiles/.vimrc $HOME
+echo "vim plugins complete"
+
+echo "Installing coc.nvim extensions"
+$SCRIPT_DIR/node-install
+
+mkdir -p ~/.vim/pack/coc/start
+cd ~/.vim/pack/coc/start
+curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzfv -
+mkdir -p ~/.config/coc/extensions
+cd ~/.config/coc/extensions
+if [ ! -f package.json ]
+then
+    echo '{"dependencies":{}}'> package.json
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+npm install coc-tsserver coc-json coc-html coc-prettier coc-css coc-python coc-yaml coc-git coc-yank coc-xml coc-cmake coc-snippets --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+
+cp $DOTFILES_DIR/coc-settings.json $HOME/.vim
+
+echo "coc.nvim extensions installed"
+

@@ -1,0 +1,35 @@
+# Fix color scheme in Docker
+export TERM=xterm-256color
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+## View current git branch 
+export PS1='\[\e[1m\e[34m\]\u@\h\[\e[0m\]:\[\e[1m\e[32m\]\w \[\e[91m\]$(parse_git_branch)\[\e[0m\]$ '
+
+## I-search
+[[ $- == *i* ]] && stty -ixon
+
+## Set editor configurations
+export EDITOR="vim"
+export SUDO_EDITOR="vim"
+set -o vi
+
+## ROS 
+alias ros1_melodic="source /opt/ros/melodic/setup.bash"
+alias ros1_noetic="source /opt/ros/noetic/setup.bash"
+alias ros2_eloquent="source /opt/ros/eloquent/setup.bash"
+alias ros2_foxy="source /opt/ros/foxy/setup.bash"
+
+## FZF
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND="find -L"
+export FZF_COMPLETION_TRIGGER="**"
+
+## Color debugger for python
+alias cpdb="python3 -m pdb"
+
+## Improved cp
+alias rcp="rsync -a --info=progress2"

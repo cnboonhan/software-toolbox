@@ -1,0 +1,10 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp3s0:
+      dhcp4: true
+      routes:
+        - to: 0.0.0.0/0 # Fill in 0 for addresses covered by bitmask
+          via: 9.9.9.9
+          on-link:  true # For when gateway is an ip address directly connected to network

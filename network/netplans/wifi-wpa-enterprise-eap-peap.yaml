@@ -1,0 +1,27 @@
+# Works as a simple internet sharing server when DHCP and DNS is set up
+# This is the netplan when connecting to Wireless@SGx
+network:
+  version: 2
+  renderer: networkd
+  wifis:
+    wlan0:
+      dhcp4: true
+      access-points:
+        Wireless@SGx:
+          auth:
+            key-management: eap
+            method: peap
+            identity: identity
+            password: password
+  ethernets:
+    eth0:
+      dhcp4: false
+      gateway4: 10.10.10.1 # Remove this to prevent default route from being added in the routing table
+      dhcp4-overrides: # Prevent default route from DHCP server from being used
+        use-routes: false
+      addresses:
+        - 10.233.30.1/24
+      nameservers:
+        addresses: [8.8.8.8]
+
+

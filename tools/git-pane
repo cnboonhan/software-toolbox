@@ -1,0 +1,22 @@
+#!/bin/bash
+session=git
+tmux new-session -d -s $session || exit
+
+tmux rename-window -t $session:0 git-pane
+tmux select-pane -t $session:git-pane.0
+
+tmux split-pane -t $session:git-pane.0 -h
+tmux split-pane -t $session:git-pane.1 -v
+
+tmux send -t $session:git-pane.0 "git config color.status always && clear" ENTER
+
+tmux send -t $session:git-pane.1 "watch -n 0.5 --color 'git status'" ENTER
+
+tmux send -t $session:git-pane.2 "watch -n 0.5 --color 'git log --color'" ENTER
+
+if [[ ! "$TMUX" ]]; then
+  tmux attach-session -t $session:git-pane.0
+else
+  tmux switch -t $session:git-pane.0
+fi
+

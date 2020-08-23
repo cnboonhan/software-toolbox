@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+      echo "Enter a term as parameter."
+      echo "This will use FZF to search for a term within files in the given directory, and open the selected file in vim for editing."
+      exit
+fi
+
+out=$(grep -rnw . -e "$1" | fzf)
+if [[ -z "$out" ]]; then
+    return
+fi
+target_file=$(echo $out | cut -d':' -f1)
+target_line=$(echo $out | cut -d':' -f2)
+vim +$target_line $target_file
+

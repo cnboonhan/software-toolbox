@@ -1,0 +1,32 @@
+#!/bin/bash
+set -e
+
+echo "Installing Network Packages."
+sudo apt update 
+
+sudo apt install debconf-utils -y
+echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
+sudo DEBIAN_FRONTEND=noninteractive apt install wireshark -y
+sudo DEBIAN_FRONTEND=noninteractive apt install tshark -y
+
+sudo apt install net-tools -y
+sudo apt install ethtool -y
+sudo apt install arp-scan -y
+sudo apt install traceroute -y
+sudo apt install mtr -y
+sudo apt install bridge-utils -y
+sudo apt install libnotify-bin -y
+sudo apt install wavemon -y
+sudo apt install nmap -y
+sudo apt install arping -y
+sudo apt install iperf3 -y 
+sudo apt install nload -y
+sudo apt install iftop -y
+sudo apt install sysstat -y
+sudo apt install nftables -y
+
+sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
+sudo setcap 'CAP_NET_ADMIN+eip CAP_NET_RAW+eip' /usr/bin/wavemon
+sudo chgrp wireshark /usr/bin/dumpcap
+sudo usermod -a -G wireshark $USER
+sudo chmod u+s /usr/bin/dumpcap

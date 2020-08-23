@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e 
+
+sudo apt install bind9 bind9utils bind9-doc -y
+echo "Add 8.8.8.8 to forwarders list"
+sleep 1
+
+sudo vim /etc/bind/named.conf.options
+
+sudo systemctl enable bind9.service
+sudo systemctl restart bind9.service
