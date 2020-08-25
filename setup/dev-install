@@ -33,6 +33,7 @@ pip3 install pdbpp
 sudo apt update 
 
 # Install CGDB
+[ -d "$HOME/cgdb" ] && yes | rm -r $HOME/cgdb
 sudo apt install texinfo flex libreadline-dev automake -y
 git clone git://github.com/cgdb/cgdb.git $HOME/cgdb
 cd $HOME/cgdb
@@ -41,7 +42,7 @@ cd $HOME/cgdb
 make
 sudo make install
 cd $HOME
-rm -r $HOME/cgdb
+yes | rm -r $HOME/cgdb
 
 
 # Install ripgrep

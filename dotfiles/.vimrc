@@ -154,12 +154,17 @@ call s:profile(s:denite_options)
 "   <leader>f - Browse list of files in current directory
 "   <leader>F - Search current directory for occurences of given term and close window if no results
 "   <leader>g - Search current directory for occurences of word under cursor
-nmap ; :Denite buffer<CR>
-nmap <leader>d :DeniteProjectDir file/rec<CR>
+nnoremap <leader>; :Denite buffer<CR>
+nnoremap <leader>f :DeniteProjectDir file/rec<CR>
+nnoremap <leader>F :Denite grep:. -no-empty<CR>
+
+nnoremap <leader>d :DeniteProjectDir -input=<c-r>=expand("<cword>")<cr> file/rec<CR>
+nnoremap <leader>D :DeniteProjectDir -input=<c-r>=expand("<cWORD>")<cr> file/rec<CR>
+nnoremap <leader>g :Denite grep -input=<c-r>=expand("<cword>")<cr><CR> 
+nnoremap <leader>G :Denite grep -input=<c-r>=expand("<cWORD>")<cr><CR> 
+
 nnoremap <leader>c :Denite command_history<CR>
 vnoremap <leader>c :<C-u>Denite command_history<CR>
-nnoremap <leader>f :<C-u>Denite grep:. -no-empty<CR>
-nnoremap <leader>F :<C-u>DeniteCursorWord grep:.<CR>
 
 " Define mappings while in 'filter' mode
 "   <C-o>         - Switch to normal mode inside of search results
