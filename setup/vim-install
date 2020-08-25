@@ -14,6 +14,7 @@ echo "installing apt binaries"
 sudo apt install vim -y
 sudo apt install vim-gtk -y
 sudo apt install default-jdk -y
+sudo apt install build-essential cmake python3-dev -y
 echo "apt installation complete"
 
 echo "installing pip binaries"
@@ -27,30 +28,11 @@ echo "vim-plug complete"
 
 echo "installing vim plugins"
 cp $SCRIPT_DIR/../dotfiles/.minimal_vimrc $HOME/.vimrc
-/usr/bin/vim -c ':PlugInstall' -c ':qall'
+/usr/bin/vim -c ':PlugInstall' -c ':qall' 
 cp $SCRIPT_DIR/../dotfiles/.vimrc $HOME
 echo "vim plugins complete"
-
-echo "Installing coc.nvim extensions"
-$SCRIPT_DIR/node-install
-
-mkdir -p $HOME/.vim/pack/coc/start
-cd $HOME/.vim/pack/coc/start
-curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzfv -
-mkdir -p $HOME/.config/coc/extensions
-cd $HOME/.config/coc/extensions
-if [ ! -f package.json ]
-then
-    echo '{"dependencies":{}}'> package.json
-fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-npm install coc-tsserver coc-json coc-html coc-prettier coc-css coc-python coc-yaml coc-git coc-yank coc-xml coc-cmake coc-snippets --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
-
-cp $DOTFILES_DIR/coc-settings.json $HOME/.vim
-
-echo "coc.nvim extensions installed"
 

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "Generating .ccls from header files from this directory..."
+echo "Compiler settings:"
+echo -e "g++\n-std=c++14\n-stdlib=libc++\n" | tee /tmp/.ccls
+
+sleep 1
+
+echo "Headers: "
+find $PWD -regex '.*/.*\.\(hpp\|h\)$' | xargs realpath | xargs dirname | uniq | xargs printf -- '-I \n%s\n' | tee -a /tmp/.ccls
+
+echo "Copying .ccls to current directory."
+cp /tmp/.ccls $PWD
+
