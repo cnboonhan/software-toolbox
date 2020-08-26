@@ -4,12 +4,20 @@ function sandbox-helper()
 {
   [ ! -z $(docker images -q cnboonhan/software-toolbox-env) ] || ( echo "please pull docker image: docker pull cnboonhan/software-toolbox-env, or build software-toolbox-env first: 'docker build -t cnboonhan/software-toolbox-env [software-toolbox PATH]'" && return )
 
-  if [ -z "$1" ]
+  # Reset the SandboxNet Docker Network
+  docker network rm SandboxNet 2>&1 >> /dev/null
+  docker network create --subnet=10.233.0.0/24 SandboxNet 2>&1 >> /dev/null
+
+  echo -e "Configuration\n\nCommand: $1\nNetwork Name: $2\nSandbox IP: $3\nHostname: $4\n"
+  echo -e "Note that Custom IP will only propagate if the target network is not bridge or host."
+
+  if [ $2 == "bridge" ] || [ $2 == "host" ]
   then
-    docker run -it --rm -w /home/ubuntu/isolation/${PWD##*/} --cap-add net_raw --cap-add net_admin --net=bridge --volume $(pwd)/..:/home/ubuntu/isolation/ --hostname sandbox cnboonhan/software-toolbox-env /bin/bash
+    docker run -it --rm -w /home/ubuntu/isolation/${PWD##*/} --cap-add net_raw --cap-add net_admin --net=$2 --volume $(pwd)/..:/home/ubuntu/isolation/ --hostname $4 cnboonhan/software-toolbox-env /bin/bash -c "sleep 1; clear; $1"
   else
-    docker run -it --rm -w /home/ubuntu/isolation/${PWD##*/} --cap-add net_raw --cap-add net_admin --net=bridge --volume $(pwd)/..:/home/ubuntu/isolation/ --hostname sandbox cnboonhan/software-toolbox-env /bin/bash -c $1
+    docker run -it --rm -w /home/ubuntu/isolation/${PWD##*/} --cap-add net_raw --cap-add net_admin --net=$2 --ip $3 --volume $(pwd)/..:/home/ubuntu/isolation/ --hostname $4 cnboonhan/software-toolbox-env /bin/bash -c "sleep 1; clear; $1"
   fi
+
 
   echo "Restore directory to initial state? Y/y (Automatic 'No' in 1 second)"
   read -t 1 yn
@@ -22,4 +30,41 @@ function sandbox-helper()
 
 export -f sandbox-helper
 
-gnome-terminal -- bash -c "sandbox-helper $1; exec bash"
+if [ ! -z $1 ] && [ $1 == "--help" ]
+then
+  echo "Usage: sandbox -c [command] -n [target-docker-network] -i [sandbox-ip] -h [host-name]"
+  exit
+fi
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -c|--cmd) CMD="$2"; shift ;;
+        -n|--net) TARGET_NET="$2"; shift ;;
+        -i|--ip) TARGET_IP="$2"; shift ;;
+        -h|--host) TARGET_HOSTNAME="$2"; shift ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+if [ -z "$CMD" ]
+then
+  CMD="bash"
+fi
+
+if [ -z "$TARGET_NET" ]
+then
+  TARGET_NET="SandboxNet"
+fi
+
+if [ -z "$TARGET_IP" ] 
+then
+  TARGET_IP="10.233.0.100"
+fi
+
+if [ -z "$TARGET_HOSTNAME" ]
+then
+  TARGET_HOSTNAME="sandbox"
+fi
+
+gnome-terminal -- bash -c "sandbox-helper $CMD $TARGET_NET $TARGET_IP $TARGET_HOSTNAME; exec bash"
