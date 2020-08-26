@@ -5,8 +5,18 @@ function sandbox-helper()
   [ ! -z $(docker images -q cnboonhan/software-toolbox-env) ] || ( echo "please pull docker image: docker pull cnboonhan/software-toolbox-env, or build software-toolbox-env first: 'docker build -t cnboonhan/software-toolbox-env [software-toolbox PATH]'" && return )
 
   # Reset the SandboxNet Docker Network
-  docker network rm SandboxNet 2>&1 >> /dev/null
-  docker network create --subnet=10.233.0.0/24 SandboxNet 2>&1 >> /dev/null
+  NET_EXISTS="$(docker network inspect $(docker network ls -q) | grep $2)"
+
+  if [ $2 == "SandboxNet" ] 
+  then
+
+    if [ ! -z "$NET_EXISTS" ]
+    then
+      docker network rm $2 2>&1 >> /dev/null
+    fi 
+
+    docker network create --subnet=10.233.0.0/24 SandboxNet 2>&1 >> /dev/null
+  fi
 
   echo -e "Configuration\n\nCommand: $1\nNetwork Name: $2\nSandbox IP: $3\nHostname: $4\n"
   echo -e "Note that Custom IP will only propagate if the target network is not bridge or host."
