@@ -12,10 +12,10 @@ function sandbox-helper()
 
     if [ ! -z "$NET_EXISTS" ]
     then
-      docker network rm $2 2>&1 >> /dev/null
+      docker network rm $2 &> /dev/null
     fi 
 
-    docker network create --subnet=10.233.0.0/24 SandboxNet 2>&1 >> /dev/null
+    docker network create --subnet=10.233.0.0/24 SandboxNet &> /dev/null
   fi
 
   echo -e "Configuration\n\nCommand: $1\nNetwork Name: $2\nSandbox IP: $3\nHostname: $4\n"
@@ -43,6 +43,7 @@ export -f sandbox-helper
 if [ ! -z $1 ] && [ $1 == "--help" ]
 then
   echo "Usage: sandbox -c [command] -n [target-docker-network] -i [sandbox-ip] -h [host-name]"
+  echo "To use multiple sandboxes at once, either set a unique ip address for each of them (-i x.x.x.x), or use a bridge network (-n bridge)."
   exit
 fi
 
