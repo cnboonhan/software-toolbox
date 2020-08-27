@@ -28,6 +28,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'morhetz/gruvbox'
 Plug 'puremourning/vimspector'
+Plug 'vim-scripts/a.vim'
 call plug#end()
 
 " colorscheme
@@ -62,6 +63,9 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 set noequalalways
 
 let &rtp = &rtp . ',' . g:vimspector_test_plugin_path
+
+" A.Vim
+nmap <leader>a :A<CR> 
 
 " EasyMotion
  let g:EasyMotion_do_mapping = 1
