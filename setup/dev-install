@@ -19,7 +19,7 @@ sudo apt install ipython3 -y
 sudo apt install openssh-server -y
 sudo apt install software-properties-common -y
 sudo apt install clang -y
-sudo apt install libclang-dev -y
+sudo apt-get install libclang*-dev -y
 sudo apt install llvm llvm-dev -y
 sudo apt install build-essential -y
 sudo apt install pv -y
