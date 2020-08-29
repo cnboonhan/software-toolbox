@@ -10,12 +10,13 @@ echo "adding ppas and update"
 sudo add-apt-repository ppa:jonathonf/vim -y
 sudo apt update 
 
-echo "installing apt binaries"
+echo "installing apt dependencies"
 sudo apt install vim -y
 sudo apt install vim-gtk -y
 sudo apt install default-jdk -y
 sudo apt install build-essential cmake python3-dev -y
-echo "apt installation complete"
+sudo apt install python3-pip -y
+echo "dependencies installation complete"
 
 echo "installing pip binaries"
 sudo -H pip3 install pynvim
