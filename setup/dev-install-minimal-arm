@@ -31,7 +31,7 @@ sudo apt install lsof -y
 sudo apt update 
 
 # Install ripgrep
-curl -L -https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep-12.1.1-arm-unknown-linux-gnueabihf.tar.gz -o $HOME/rg.deb
+curl -L https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep-12.1.1-arm-unknown-linux-gnueabihf.tar.gz -o $HOME/rg.deb
 sudo dpkg -i $HOME/rg.deb
 rm $HOME/rg.deb
 
