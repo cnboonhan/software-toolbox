@@ -16,7 +16,7 @@ map Q <Nop>
 """ PLUGINS 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } 
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer' } 
 Plug 'kassio/neoterm'
 Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
