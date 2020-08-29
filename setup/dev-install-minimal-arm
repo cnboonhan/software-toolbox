@@ -28,26 +28,10 @@ sudo apt install htop -y
 sudo apt install time -y
 sudo apt install lsof -y
 
-pip3 install jupyterlab
-pip3 install pdbpp
-
 sudo apt update 
 
-# Install CGDB
-[ -d "$HOME/cgdb" ] && yes | rm -r $HOME/cgdb
-sudo apt install texinfo flex libreadline-dev automake -y
-git clone git://github.com/cgdb/cgdb.git $HOME/cgdb
-cd $HOME/cgdb
-./autogen.sh
-./configure --prefix=/usr/local
-make
-sudo make install
-cd $HOME
-yes | rm -r $HOME/cgdb
-
-
 # Install ripgrep
-sudo snap install ripgrep --classic
+sudo apt install ripgrep -y
 
 # Install FZF
 [ -d "$HOME/.fzf" ] && yes | rm -r $HOME/.fzf 
@@ -64,11 +48,8 @@ sudo cmake --build Release --target install
 cd $HOME 
 yes | rm -r $HOME/ccls
 
-$SCRIPT_DIR/node-install
 $SCRIPT_DIR/vim-install
 $SCRIPT_DIR/tmux-install
-$SCRIPT_DIR/network-tools-install
-$SCRIPT_DIR/docker-install
 
 sudo cp $SCRIPT_DIR/../tools/* /usr/local/bin/
 cp $DOTFILES_DIR/.bashrc $HOME

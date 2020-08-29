@@ -31,7 +31,7 @@ sudo apt install lsof -y
 sudo apt update 
 
 # Install ripgrep
-sudo apt install ripgrep -y
+sudo snap install ripgrep --classic
 
 # Install FZF
 [ -d "$HOME/.fzf" ] && yes | rm -r $HOME/.fzf 
