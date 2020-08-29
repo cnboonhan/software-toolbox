@@ -58,3 +58,4 @@ cp $DOTFILES_DIR/.bashrc $HOME
 
 $SCRIPT_DIR/dotfiles-install # Do this again to make sure dotfiles are propagated
 source $HOME/.bashrc
+sudo apt upgrade -y
