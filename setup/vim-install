@@ -16,6 +16,8 @@ sudo apt install default-jdk -y
 sudo apt install build-essential cmake python3-dev -y
 sudo apt install python3-pip -y
 sudo apt install libncurses5 -y # Fixes some Clangd issues on Raspberry Pi
+sudo apt install vim-gtk -y # For copying to system clipboard
+
 echo "dependencies installation complete"
 
 echo "installing pip binaries"
