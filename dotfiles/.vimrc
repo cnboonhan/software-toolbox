@@ -11,6 +11,7 @@ set wrap breakindent " Wrapping text will be indented properly
 set encoding=utf-8
 set relativenumber
 set clipboard=unnamedplus " Use the system clipboard for yanking
+set foldmethod=syntax
 map Q <Nop>
 
 """ PLUGINS 
