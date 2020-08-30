@@ -1,4 +1,4 @@
-""" SETTINGS 
+""" SETTINGS
 let mapleader=","
 set hidden  "  Hides buffers instead of closing them
 set wildmenu " An navigable menu will appear on entering <Tab> after :command
@@ -16,7 +16,7 @@ map Q <Nop>
 """ PLUGINS 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer' } 
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } 
 Plug 'kassio/neoterm'
 Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
@@ -28,7 +28,6 @@ Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'morhetz/gruvbox'
 Plug 'puremourning/vimspector'
-Plug 'vim-scripts/a.vim'
 call plug#end()
 
 " colorscheme
@@ -48,6 +47,9 @@ xnoremap <space>p "_dP
 
 """ PLUGIN CONFIGURATIONS
 
+" YouCompletMe
+let g:ycm_autoclose_preview_window_after_completion = 1
+
 " Vimspector
 " Start Debug / Continue until Break: F5
 " Step Over: F10
@@ -63,9 +65,6 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 set noequalalways
 
 let &rtp = &rtp . ',' . g:vimspector_test_plugin_path
-
-" A.Vim
-nmap <leader>a :A<CR> 
 
 " EasyMotion
  let g:EasyMotion_do_mapping = 1
