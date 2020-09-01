@@ -28,6 +28,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'morhetz/gruvbox'
 Plug 'puremourning/vimspector'
+Plug 'w0rp/ale'
 call plug#end()
 
 " colorscheme
@@ -46,9 +47,17 @@ xnoremap <space>d "_d
 xnoremap <space>p "_dP
 
 """ PLUGIN CONFIGURATIONS
-
+"
 " YouCompletMe
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+" ALE
+let g:ale_linters = {'python': ['flake8']}
+let g:ale_fixers = {'python': ['autopep8']}
+"let g:ale_fix_on_save = 1
+
+nmap <leader>z :ALEToggle<CR>
+nmap <leader>Z :ALEFix<CR>
 
 " Vimspector
 " Start Debug / Continue until Break: F5
