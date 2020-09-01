@@ -11,6 +11,7 @@ set wrap breakindent " Wrapping text will be indented properly
 set encoding=utf-8
 set relativenumber
 set clipboard=unnamedplus " Use the system clipboard for yanking
+set foldmethod=syntax
 map Q <Nop>
 
 """ PLUGINS 
@@ -29,6 +30,7 @@ Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'morhetz/gruvbox'
 Plug 'puremourning/vimspector'
 Plug 'w0rp/ale'
+Plug 'vim-scripts/a.vim'
 call plug#end()
 
 " colorscheme
@@ -85,6 +87,7 @@ let g:NERDTreeDirArrowExpandable = '↠'
 let g:NERDTreeDirArrowCollapsible = '↡'
 nmap <leader>q :NERDTreeToggle<CR>
 nmap <leader>Q :TagbarToggle<CR>
+nmap <leader>a :A<CR>
 
 """ MISC 
 " Removes highlights from searches
