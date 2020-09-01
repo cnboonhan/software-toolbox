@@ -29,6 +29,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'morhetz/gruvbox'
 Plug 'puremourning/vimspector'
+Plug 'vim-scripts/a.vim'
 call plug#end()
 
 " colorscheme
@@ -77,6 +78,7 @@ let g:NERDTreeDirArrowExpandable = '↠'
 let g:NERDTreeDirArrowCollapsible = '↡'
 nmap <leader>q :NERDTreeToggle<CR>
 nmap <leader>Q :TagbarToggle<CR>
+nmap <leader>a :A<CR>
 
 """ MISC 
 " Removes highlights from searches
