@@ -5,13 +5,13 @@ set wildmenu " An navigable menu will appear on entering <Tab> after :command
 set wildmode=longest:full,full " Choice of displaying autocomplete after :command
 set mouse=a " Allows point and click 
 filetype plugin indent on " Enable filetype detection, ftplugins and indent scripts
-set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent " Formatting settings
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " Formatting settings
 set incsearch ignorecase smartcase hlsearch " Search settings
 set wrap breakindent " Wrapping text will be indented properly
 set encoding=utf-8
 set relativenumber
 set clipboard=unnamedplus " Use the system clipboard for yanking
-set foldmethod=syntax
+set foldmethod=indent
 map Q <Nop>
 
 """ PLUGINS 
@@ -57,7 +57,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ale_linters = {'python': ['flake8']}
 let g:ale_fixers = {'python': ['autopep8']}
 "let g:ale_fix_on_save = 1
-
+let g:ale_python_flake8_options = '--ignore=E111,F841'
 nmap <leader>z :ALEToggle<CR>
 nmap <leader>Z :ALEFix<CR>
 
