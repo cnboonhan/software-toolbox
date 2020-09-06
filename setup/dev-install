@@ -36,6 +36,7 @@ sudo apt update
 # Install CGDB
 [ -d "$HOME/cgdb" ] && yes | rm -r $HOME/cgdb
 sudo apt install texinfo flex libreadline-dev libncurses5-dev automake -y
+ sudo apt install llvm-7 clang-7 libclang-7-dev -y
 git clone git://github.com/cgdb/cgdb.git $HOME/cgdb
 cd $HOME/cgdb
 ./autogen.sh
