@@ -12,6 +12,7 @@ set encoding=utf-8
 set relativenumber
 set clipboard=unnamedplus " Use the system clipboard for yanking
 set foldmethod=indent
+set nofoldenable
 map Q <Nop>
 
 """ PLUGINS 
