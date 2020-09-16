@@ -7,5 +7,5 @@ sudo netplan generate --debug
 sudo netplan apply
 sudo systemctl daemon-reload
 echo "Unblocking wireless devices.."
-rfkill unblock all
+sudo rfkill unblock all
 watch ip a
