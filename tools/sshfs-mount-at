@@ -20,3 +20,4 @@ fi
 
 sudo umount $2 &> /dev/null || true
 sudo sshfs -o allow_other,default_permissions $1 $2
+export MNT_HOME=$2
