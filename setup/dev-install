@@ -31,6 +31,9 @@ sudo apt install lsof -y
 pip3 install jupyterlab
 pip3 install pdbpp
 
+# see udev in dmesg / syslog
+sudo udevadm control --log-priority=info
+
 sudo apt update 
 
 # Install CGDB
