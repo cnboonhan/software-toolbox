@@ -30,6 +30,9 @@ sudo apt install lsof -y
 
 sudo apt update 
 
+# see udev in dmesg / syslog
+sudo udevadm control --log-priority=info
+
 # Install ripgrep
 sudo apt install ripgrep -y
 
