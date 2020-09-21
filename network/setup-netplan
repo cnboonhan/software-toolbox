@@ -5,6 +5,7 @@ set -e
 sudo touch /etc/netplan/01-config.yaml
 echo "Note that config files must be .yaml, not .yml"
 echo "Copying template netplan config.yaml to clipboard."
+echo "Paste it in the opened file!"
 sleep 1
 
 echo "
