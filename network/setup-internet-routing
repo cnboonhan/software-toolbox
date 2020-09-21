@@ -7,6 +7,10 @@ sleep 1
 
 sudoedit /etc/sysctl.conf
 
+INTERFACE_A='eth0'
+INTERFACE_B='wlan0' # Internet-facing
+echo "Forwarding between interfaces $INTERFACE_A (local) and $INTERFACE_B.. (internet)"
+
 sudo iptables -P INPUT ACCEPT
 sudo iptables -P FORWARD ACCEPT
 sudo iptables -P OUTPUT ACCEPT
@@ -15,11 +19,10 @@ sudo iptables -t mangle -F
 sudo iptables -F
 sudo iptables -X
 
-# Assuming the internet interface is wlan0
 # https://serverfault.com/questions/431593/iptables-forwarding-between-two-interface
-sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
-sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
-sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
+sudo iptables -A FORWARD -i $INTERFACE_A -o $INTERFACE_B -j ACCEPT
+sudo iptables -A FORWARD -i $INTERFACE_B -o $INTERFACE_A -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -o $INTERFACE_B -j MASQUERADE
 
 
 sudo apt install iptables-persistent -y
