@@ -1,15 +1,22 @@
 #!/bin/bash
 
-set -e 
+generate-ssh-key() {
 
-if [ $# -eq 0 ]
-  then
-    echo "Supply email!"
-    exit 1
-fi
+    if [ $# -eq 0 ]
+      then
+        echo "Supply email!"
+        exit 1
+    fi
 
-sudo apt-get install xclip -y
-ssh-keygen -t rsa -b 4096 -C $1
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
-xclip -sel clip < ~/.ssh/id_rsa.pub
+    sudo apt-get install xclip -y
+    ssh-keygen -t rsa -b 4096 -C $1
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_rsa
+
+    echo 'public key has been copied to system clipboard'
+    xclip -sel clip < ~/.ssh/id_rsa.pub
+
+}
+
+export -f generate-ssh-key 
+generate-ssh-key $1

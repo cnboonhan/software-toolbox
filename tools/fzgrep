@@ -21,6 +21,5 @@ function fzgrep() {
 
 }
 
-
 export -f fzgrep
 fzgrep $1

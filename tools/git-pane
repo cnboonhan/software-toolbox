@@ -1,4 +1,7 @@
 #!/bin/bash
+
+function git-pane(){
+
 session=git
 tmux new-session -d -s $session || exit
 
@@ -21,3 +24,7 @@ else
   tmux switch -t $session:git-pane.0
 fi
 
+}
+
+export -f git-pane
+git-pane
