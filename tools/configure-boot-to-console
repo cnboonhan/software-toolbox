@@ -29,14 +29,12 @@ configure-boot-to-console() {
         echo 'enabling multi-user.targets for console mode'
         sudo systemctl enable multi-user.target --force
         sudo systemctl set-default multi-user.target
-    else 
-        if [ "$1" == 'gui' ]
+    elif  [ "$1" == 'gui' ]
         then
             sudo sh -c 'echo "GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash\"" >> /etc/default/grub'
             echo 'enabling graphical.target for gui mode'
             sudo systemctl enable graphical.target --force
             sudo systemctl set-default graphical.target 
-        fi
     fi
 
     echo "$1 mode on next reboot."

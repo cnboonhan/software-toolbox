@@ -9,18 +9,31 @@ run-on-file-update() {
         echo "Enter path of file to watch as parameter 1."
     fi
 
-    [ ! -f $1 ] && echo "File $1 does not exist." && exit
-
     if [ -z "$2" ]
       then
         echo "Enter command to execute as parameter 2."
         exit
     fi
 
-    while :
-    do
-      inotifywait -e close_write $1 | eval $2
-    done
+    if [ -f $1 ]; then
+        echo "file was provided."
+        
+        while :
+        do
+          inotifywait -e close_write $1 | eval $2
+        done
+
+    elif [ -d $1 ]; then
+        echo "directory was provided."
+
+        while :
+        do
+          inotifywait -e close_write -r -m $1 | eval $2
+        done
+
+    else 
+        echo "$1 is not a directory or a file."
+    fi
 
 }
 
