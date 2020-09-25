@@ -1,11 +1,20 @@
 #!/bin/bash
 
-while true; do
-    read -p "Turn [off] or [on] power management? " yn
-    case $yn in
+## Configure GRUB to boot in console mode or GUI mode
+configure-power-management() {
+    if [ "$1" != 'off' ] && [  "$1" != 'on' ]
+    then
+        echo "Enter 'off' or 'on' to set power management accordingly."
+        return
+    fi
+
+    case $1 in
         [off]* ) sudo sed -i s/wifi.powersave\ =\ ./wifi.powersave\ =\ 2/ /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf;  break;;
         [on]* ) sudo sed -i s/wifi.powersave\ =\ ./wifi.powersave\ =\ 3/ /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf; break;;
         * ) echo "Please answer off or on ";;
     esac
-done
 
+}
+
+export -f configure-power-management
+configure-power-management $1

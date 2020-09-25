@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function fzgrep() {
+fzgrep() {
 
     if [ -z "$1" ]
     then

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+monitor() {
+
 session=monitor
 tmux new-session -d -s $session || exit
 
@@ -47,3 +50,7 @@ else
   tmux switch -t $session:htop.0
 fi
 
+}
+
+export -f monitor
+monitor

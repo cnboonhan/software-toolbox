@@ -1,5 +1,7 @@
 #!/bin/bash
-set -e
+
+function sshfs-mount-at()
+{
 
 if [ -z "$1" ]
   then
@@ -21,3 +23,8 @@ fi
 sudo umount $2 &> /dev/null || true
 sudo sshfs -o allow_other,default_permissions $1 $2
 export MNT_HOME=$2
+
+}
+
+export -f sshfs-mount-at
+sshfs-mount-at $1 $2

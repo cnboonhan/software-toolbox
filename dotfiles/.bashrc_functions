@@ -49,3 +49,26 @@ swp-purge() {
     echo 'purging swap files in current directory.'
     find . -type f -name "*.sw[klmnop]" -delete
 }
+
+reset-folder-permissions() {
+    if [ $# -eq 0 ]
+      then
+        echo "Usage: reset-folder-permissions [folder]"
+        exit 1
+    fi
+
+    sudo chown -R $USER $1
+    chmod -R a-x,o-w,+X $1
+}
+
+wifi-scan() {
+
+if [ $# -eq 0 ]
+  then
+    echo "Supply network interface to scan with!"
+    exit 1
+fi
+
+sudo iw dev $1 scan ap-force | grep -E 'SSID: [[:alnum:]]+'
+
+}

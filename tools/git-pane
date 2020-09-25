@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function git-pane(){
+git-pane() {
 
 session=git
 tmux new-session -d -s $session || exit

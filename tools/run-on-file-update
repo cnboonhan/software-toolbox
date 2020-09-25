@@ -1,21 +1,29 @@
 #!/bin/bash
 
-echo "Runs the given command each time the given file is written to."
+run-on-file-update() {
 
-if [ -z "$1" ]
-  then
-    echo "Enter path of file to watch as parameter 1."
-fi
+    echo "Runs the given command each time the given file is written to."
 
-[ ! -f $1 ] && echo "File $1 does not exist." && exit
+    if [ -z "$1" ]
+      then
+        echo "Enter path of file to watch as parameter 1."
+    fi
 
-if [ -z "$2" ]
-  then
-    echo "Enter command to execute as parameter 2."
-    exit
-fi
+    [ ! -f $1 ] && echo "File $1 does not exist." && exit
 
-while :
-do
-  inotifywait -e close_write $1 | eval $2
-done
+    if [ -z "$2" ]
+      then
+        echo "Enter command to execute as parameter 2."
+        exit
+    fi
+
+    while :
+    do
+      inotifywait -e close_write $1 | eval $2
+    done
+
+}
+
+export -f run-on-file-update
+
+run-on-file-update $1 $2
