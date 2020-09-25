@@ -72,3 +72,7 @@ fi
 sudo iw dev $1 scan ap-force | grep -E 'SSID: [[:alnum:]]+'
 
 }
+
+git-pull-all() {
+    find . -type d -name .git -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;
+}
