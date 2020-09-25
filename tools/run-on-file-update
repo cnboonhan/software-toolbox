@@ -15,6 +15,8 @@ run-on-file-update() {
         exit
     fi
 
+    echo "executing $2 on saving of $1"
+
     if [ -f $1 ]; then
         echo "file was provided."
         
@@ -39,4 +41,4 @@ run-on-file-update() {
 
 export -f run-on-file-update
 
-run-on-file-update $1 $2
+run-on-file-update "$1" "$2"
