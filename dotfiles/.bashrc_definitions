@@ -7,7 +7,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ## View current git branch in terminal prompt
-export PS1='\[\e[1m\e[34m\]\u@\h\[\e[0m\]:\[\e[1m\e[32m\]\w \[\e[91m\]$(parse_git_branch)\[\e[0m\]$ '
+export PS1='\[\e[1m\e[34m\]\u@\h\[\e[0m\]:\[\e[1m\e[32m\]\w \[\e[91m\]$(parse-git-branch)\[\e[0m\]$ '
 
 ## I-search
 [[ $- == *i* ]] && stty -ixon
