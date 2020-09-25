@@ -22,7 +22,7 @@ run-on-file-update() {
         
         while :
         do
-          inotifywait -e close_write $1 | eval $2
+          inotifywait -q -e close_write $1 | eval $2
         done
 
     elif [ -d $1 ]; then
@@ -30,7 +30,7 @@ run-on-file-update() {
 
         while :
         do
-          inotifywait -e close_write -r -m $1 | eval $2
+          inotifywait -q -e close_write -r -m $1 | eval $2
         done
 
     else 
