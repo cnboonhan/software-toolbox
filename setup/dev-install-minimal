@@ -37,7 +37,9 @@ sudo udevadm control --log-priority=info
 sudo snap install ripgrep --classic
 
 # Install FZF
-sudo apt install fzf -y
+[ -d "$HOME/.fzf" ] && yes | rm -r $HOME/.fzf 
+git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+yes | $HOME/.fzf/install
 
 # Install CCLS
 [ -d "$HOME/ccls" ] && yes | rm -r $HOME/ccls
