@@ -54,9 +54,7 @@ yes | rm -r $HOME/cgdb
 sudo snap install ripgrep --classic
 
 # Install FZF
-[ -d "$HOME/.fzf" ] && yes | rm -r $HOME/.fzf 
-git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-yes | $HOME/.fzf/install
+sudo apt install fzf -y
 
 # Install CCLS
 [ -d "$HOME/ccls" ] && yes | rm -r $HOME/ccls
