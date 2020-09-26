@@ -27,6 +27,7 @@ sudo apt install python3-setuptools -y
 sudo apt install htop -y
 sudo apt install time -y
 sudo apt install lsof -y
+sudo apt install bd -y
 
 sudo apt update 
 
