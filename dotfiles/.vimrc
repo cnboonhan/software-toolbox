@@ -32,6 +32,7 @@ Plug 'morhetz/gruvbox'
 Plug 'puremourning/vimspector'
 Plug 'w0rp/ale'
 Plug 'vim-scripts/a.vim'
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 call plug#end()
 
 " colorscheme
@@ -50,7 +51,10 @@ xnoremap <space>d "_d
 xnoremap <space>p "_dP
 
 """ PLUGIN CONFIGURATIONS
-"
+
+" Pydocstring 
+let g:pydocstring_doq_path = '/usr/local/bin/doq'
+
 " YouCompletMe
 let g:ycm_autoclose_preview_window_after_completion = 1
 

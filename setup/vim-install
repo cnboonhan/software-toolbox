@@ -20,6 +20,7 @@ sudo apt install flake8 -y
 sudo apt install python3-pip -y
 sudo apt install vim-gtk -y # For copying to system clipboard
 pip3 install --upgrade autopep8
+pip3 install doq
 
 echo "dependencies installation complete"
 
