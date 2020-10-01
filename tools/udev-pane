@@ -31,7 +31,7 @@ tmux split-pane -t $session:udev-pane.0 -h
 
 tmux send -t $session:udev-pane.0 'cd /etc/udev/rules.d && clear' ENTER
 tmux send -t $session:udev-pane.1 'watch -d "ls /dev | column"' ENTER
-tmux send -t $session:udev-pane.2 'udevadm info -a -n /dev/[device-name]'
+tmux send -t $session:udev-pane.2 'udevadm info -a -n /dev/[/dev/ttyACM* or /sys/class/net/wlan*]'
 tmux send -t $session:udev-pane.3 'dmesg -w' ENTER
 tmux send -t $session:udev-pane.4 'watch -d "lsblk"' ENTER
 tmux send -t $session:udev-pane.5 'watch -d "lsusb"' ENTER
