@@ -1,0 +1,20 @@
+#!/bin/bash
+
+test-trigger() {
+
+    PARENT_COMMAND=$(ps -o args=$PPID)
+
+    MSG="Triggered by $PARENT_COMMAND at `/usr/bin/date `"
+
+    echo $MSG
+
+    if [ $1 ]
+    then
+        echo "Appending to $1"
+        touch $1
+        echo $MSG >> $1
+    fi
+}
+
+export -f test-trigger
+test-trigger $1

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+udev-pane() {
+
+session=udev
+tmux new-session -d -x "$(tput cols)" -y "$(tput lines)" -s $session || exit
+
+# Configuring panes to use the current terminals resolution
+WW=$(tmux display -p '#{window_width}')
+WH=$(tmux display -p '#{window_height}')
+
+WL=$(expr $WW \* 7 / 10)  # Amount to resize to the left
+WR=$(expr $WW \* 3 / 10)  # Amount to resize to the right
+WU=$(expr $WH \* 8 / 10)  # Amount to resize to the top
+WD=$(expr $WH \* 2 / 10)  # Amount to resize to the bottom
+
+tmux rename-window -t $session:0 udev-pane
+tmux select-pane -t $session:udev-pane.0
+
+tmux split-pane -t $session:udev-pane.0 -v
+tmux split-pane -t $session:udev-pane.0 -h
+
+tmux resize-pane -t $session:udev-pane.1 -x $WR
+tmux resize-pane -t $session:udev-pane.2 -y $WD
+
+tmux split-pane -t $session:udev-pane.1 -v
+tmux split-pane -t $session:udev-pane.3 -h
+tmux split-pane -t $session:udev-pane.0 -h
+
+#tmux resize-pane -t $session:udev-pane.0 -x $WU
+
+tmux send -t $session:udev-pane.0 'cd /etc/udev/rules.d && clear' ENTER
+tmux send -t $session:udev-pane.1 'watch -d "ls /dev | column"' ENTER
+tmux send -t $session:udev-pane.2 'udevadm info -a -n /dev/[device-name]'
+tmux send -t $session:udev-pane.3 'dmesg -w' ENTER
+tmux send -t $session:udev-pane.4 'watch -d "lsblk"' ENTER
+tmux send -t $session:udev-pane.5 'watch -d "lsusb"' ENTER
+
+tmux split-pane -t $session:udev-pane.0 -v
+tmux resize-pane -t $session:udev-pane.1 -y $WD
+tmux send -t $session:udev-pane.1 'sudo udevadm control --reload && sudo udevadm trigger'
+
+tmux split-pane -t $session:udev-pane.2 -v
+tmux resize-pane -t $session:udev-pane.3 -y $WD
+tmux send -t $session:udev-pane.3 'tail -f [file-to-watch]'
+
+if [[ ! "$TMUX" ]]; then
+  tmux attach-session -t $session:udev-pane.0
+else
+  tmux switch -t $session:udev-pane.0
+fi
+
+}
+
+export -f udev-pane
+udev-pane

@@ -3,18 +3,28 @@
 dev-pane() {
 
 session=develop
-tmux new-session -d -s $session || exit
+tmux new-session -d -x "$(tput cols)" -y "$(tput lines)" -s $session || exit
+
+# Configuring panes to use the current terminals resolution
+WW=$(tmux display -p '#{window_width}')
+WH=$(tmux display -p '#{window_height}')
+
+WL=$(expr $WW \* 8 / 10)  # Amount to resize to the left
+WR=$(expr $WW \* 2 / 10)  # Amount to resize to the right
+WU=$(expr $WH \* 9 / 10)  # Amount to resize to the top
+WD=$(expr $WH \* 1 / 10)  # Amount to resize to the bottom
 
 tmux rename-window -t $session:0 dev-pane
 tmux select-pane -t $session:dev-pane.0
 
 tmux split-pane -t $session:dev-pane.0 -h
-tmux send -t $session:dev-pane.0 'tmux resize-pane -x 235 && clear' ENTER
+tmux resize-pane -t $session:dev-pane.1 -x $WR
 
 tmux split-pane -t $session:dev-pane.0 -v
-tmux send -t $session:dev-pane.0 'tmux resize-pane -y 65 && clear' ENTER
 
+tmux resize-pane -t $session:dev-pane.0 -y $WU
 tmux split-pane -t $session:dev-pane.1 -h
+tmux split-pane -t $session:dev-pane.3 -v
 
 if [[ ! "$TMUX" ]]; then
   tmux attach-session -t $session:dev-pane.0

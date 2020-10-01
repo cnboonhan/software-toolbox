@@ -3,7 +3,16 @@
 git-pane() {
 
 session=git
-tmux new-session -d -s $session || exit
+tmux new-session -d -x "$(tput cols)" -y "$(tput lines)" -s $session || exit
+
+# Configuring panes to use the current terminals resolution
+WW=$(tmux display -p '#{window_width}')
+WH=$(tmux display -p '#{window_height}')
+
+WL=$(expr $WW \* 8 / 10)  # Amount to resize to the left
+WR=$(expr $WW \* 2 / 10)  # Amount to resize to the right
+WU=$(expr $WH \* 9 / 10)  # Amount to resize to the top
+WD=$(expr $WH \* 1 / 10)  # Amount to resize to the bottom
 
 tmux rename-window -t $session:0 git-pane
 tmux select-pane -t $session:git-pane.0
@@ -11,7 +20,7 @@ tmux select-pane -t $session:git-pane.0
 tmux split-pane -t $session:git-pane.0 -h
 tmux split-pane -t $session:git-pane.1 -v
 tmux split-pane -t $session:git-pane.2 -v
-tmux resize-pane -t $session:git-pane.0 -x 80
+tmux resize-pane -t $session:git-pane.0 -x $WL
 
 tmux send -t $session:git-pane.0 "git config color.status always && clear" ENTER
 
