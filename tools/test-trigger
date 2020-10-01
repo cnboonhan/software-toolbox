@@ -2,18 +2,24 @@
 
 test-trigger() {
 
-    PARENT_COMMAND=$(ps -o args=$PPID)
+    # PARENT_COMMAND=$(ps -o comm=$PPID)
+    # PARENT_COMMAND=$(ps -o args=$PPID) # More detail
 
-    MSG="Triggered by $PARENT_COMMAND at `/usr/bin/date `"
+    # MSG="Triggered by $PARENT_COMMAND at `/usr/bin/date `"
+    MSG="Triggered at `/usr/bin/date `"
 
     echo $MSG
 
-    if [ $1 ]
-    then
-        echo "Appending to $1"
-        touch $1
-        echo $MSG >> $1
+    OUTFILE=$1
+    if [ -z $OUTFILE ]
+    then 
+        OUTFILE='/tmp/test-trigger.log'
     fi
+	    
+    echo "Appending to $OUTFILE"
+    touch $OUTFILE
+    echo $MSG >> $OUTFILE
+
 }
 
 export -f test-trigger
