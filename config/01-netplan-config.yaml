@@ -1,0 +1,101 @@
+network:
+  version: 2
+  renderer: networkd 
+
+  # Wired
+  ethernets:
+    # Dynamic IP
+    eth0:
+      dhcp4: true
+      gateway4: 192.168.0.1 # Adds a default route manually
+      routes:
+        - to: 192.168.1.0/24
+          via: 192.168.0.1
+          # on-link:  true # For when gateway is an ip address directly connected to network, even when the address does not match the subnet
+      nameservers: # Adds DNS server
+        addresses: [8.8.8.8]
+      dhcp4-overrides: 
+        use-routes: false # Prevent default route from DHCP server from being used
+        route-metric: 100 # Priority of this route in making routing decisions
+
+    # Static IP
+    eth1:
+      dhcp4: false 
+      addresses:
+        - 192.168.0.2/24
+      gateway4: 192.168.0.1 # Adds a default route manually
+      routes:
+        - to: 192.168.1.0/24
+          via: 192.168.0.1
+          # on-link:  true # For when gateway is an ip address directly connected to network, even when the address does not match the subnet
+      nameservers: # Adds DNS server
+        addresses: [8.8.8.8]
+      dhcp4-overrides: 
+        use-routes: false # Prevent default route from DHCP server from being used
+        route-metric: 100 # Priority of this route in making routing decisions
+
+  # Wireless
+  wifis:
+    wlan0:
+      # Dynamic IP
+      dhcp4: yes
+      access-points:
+        "SSID":
+          password: "passwd"
+        # For unsecured network
+        # opennetwork_SSID: {}
+      gateway4: 192.168.0.1 # Adds a default route manually
+      routes:
+        - to: 192.168.1.0/24
+          via: 192.168.0.1
+          # on-link:  true # For when gateway is an ip address directly connected to network, even when the address does not match the subnet
+      nameservers: # Adds DNS server
+        addresses: [8.8.8.8]
+      dhcp4-overrides: 
+        use-routes: false # Prevent default route from DHCP server from being used
+        route-metric: 100 # Priority of this route in making routing decisions
+
+    wlan1:
+      # Static IP
+      dhcp4: no 
+      access-points:
+        "SSID":
+          password: "passwd"
+        # For unsecured network
+        # opennetwork_SSID: {}
+      gateway4: 192.168.0.1 # Adds a default route manually
+      routes:
+        - to: 192.168.1.0/24
+          via: 192.168.0.1
+          # on-link:  true # For when gateway is an ip address directly connected to network, even when the address does not match the subnet
+      nameservers: # Adds DNS server
+        addresses: [8.8.8.8]
+      dhcp4-overrides: 
+        use-routes: false # Prevent default route from DHCP server from being used
+        route-metric: 100 # Priority of this route in making routing decisions
+
+    wlan2:
+      # PEAP authentication
+      dhcp4: true
+      access-points:
+        Wireless@SGx:
+          auth:
+            key-management: eap
+            method: peap
+            identity: identity
+            password: password
+
+    wlan3:
+      # TLS authentication ( certificates )
+      dhcp4: yes
+      access-points:
+        eduroam:
+          auth:
+            key-management: eap
+            method: tls
+            anonymous-identity: "@cust.example.com"
+            identity: "cert-joe@cust.example.com"
+            ca-certificate: /etc/ssl/cust-cacrt.pem
+            client-certificate: /etc/ssl/cust-crt.pem
+            client-key: /etc/ssl/cust-key.pem
+            client-key-password: "d3cryptPr1v4t3K3y"
