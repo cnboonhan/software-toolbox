@@ -9,6 +9,8 @@ echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debc
 sudo DEBIAN_FRONTEND=noninteractive apt install wireshark -y
 sudo DEBIAN_FRONTEND=noninteractive apt install tshark -y
 
+sudo apt install hostapd freeradius -y
+sudo apt install netsniff-ng -y
 sudo apt install iputils-ping -y
 sudo apt install net-tools -y
 sudo apt install ethtool -y

@@ -75,8 +75,8 @@ $SCRIPT_DIR/vim-install
 $SCRIPT_DIR/tmux-install
 $SCRIPT_DIR/network-tools-install
 $SCRIPT_DIR/docker-install
-
 $SCRIPT_DIR/tools-install
+
 cp $DOTFILES_DIR/.bashrc $HOME
 
 $SCRIPT_DIR/dotfiles-install # Do this again to make sure dotfiles are propagated

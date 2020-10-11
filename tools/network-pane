@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Create first session with meaningful name
+session=network
+tmux new-session -d -x "$(tput cols)" -y "$(tput lines)" -s $session || exit # Stop if duplicate sessions exist to be safe
+
+# Configuring panes to use the current terminals resolution
+WW=$(tmux display -p '#{window_width}')
+WH=$(tmux display -p '#{window_height}')
+
+WL=$(expr $WW \* 8 / 10)  # Amount to resize to the left
+WR=$(expr $WW \* 2 / 10)  # Amount to resize to the right
+WU=$(expr $WH \* 8 / 10)  # Amount to resize to the top
+WD=$(expr $WH \* 2 / 10)  # Amount to resize to the bottom
+
+# Rename first window to a standard name for consistency
+tmux rename-window -t $session:0 main
+tmux select-pane -t $session:main.0
+
+tmux new-window -t $session:1 -n "hostapd" 
+tmux split-pane -t $session:hostapd.0 -v
+tmux resize-pane -t $session:hostapd.1 -y $WD
+tmux send -t $session:hostapd.0 "sudo touch /etc/hostapd/hostapd.conf && sudoedit /etc/hostapd/hostapd.conf" ENTER
+tmux send -t $session:hostapd.1 "sudo systemctl unmask hostapd && sudo rfkill unblock all && sudo systemctl start hostapd.service" 
+
+# Handle both cases when tmux is already launched, or not
+if [[ ! "$TMUX" ]]; then
+  tmux attach-session -t $session:main.0
+else
+  tmux switch -t $session:main.0
+fi
+

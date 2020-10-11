@@ -1,9 +1,0 @@
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    enp3s0:
-      dhcp4: true
-      gateway4: 10.233.0.1 # Remove this to prevent default route from being added in the routing table
-      dhcp4-overrides: # Prevent default route from DHCP server from being used
-        use-routes: false
