@@ -17,10 +17,20 @@ WD=$(expr $WH \* 2 / 10)  # Amount to resize to the bottom
 tmux rename-window -t $session:0 main
 tmux select-pane -t $session:main.0
 
-tmux new-window -t $session:1 -n "hostapd" 
-tmux send -t $session:hostapd.0 "toggle-hostapd-ap on" 
+tmux new-window -t $session:1 -n "dnsmasq" 
+tmux split-pane -t $session:dnsmasq.0 -v
+tmux split-pane -t $session:dnsmasq.0 -h
+tmux resize-pane -t $session:dnsmasq.2 -y $WD
+tmux send -t $session:dnsmasq.0 "sudoedit /etc/dnsmasq.conf" ENTER
+tmux send -t $session:dnsmasq.1 "journalctl -e -u dnsmasq.service -f" ENTER
+tmux send -t $session:dnsmasq.2 "toggle-dnsmasq on" 
 
-tmux new-window -t $session:2 -n "netplan" 
+tmux new-window -t $session:2 -n "hostapd" 
+tmux split-pane -t $session:hostapd.0 -h
+tmux send -t $session:hostapd.0 "toggle-ip-forwarding on && toggle-hostapd-ap on" 
+tmux send -t $session:hostapd.1 "journalctl -e -u hostapd.service -f" ENTER
+
+tmux new-window -t $session:3 -n "netplan" 
 tmux send -t $session:netplan.0 "netplan-reload"
 
 # Handle both cases when tmux is already launched, or not
