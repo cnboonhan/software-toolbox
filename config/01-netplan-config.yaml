@@ -34,6 +34,12 @@ network:
         use-routes: false # Prevent default route from DHCP server from being used
         route-metric: 100 # Priority of this route in making routing decisions
 
+    # hostapd wifi hotspots are put under ethernets and need a static ip
+    wlan-hostapd:
+      dhcp4: false
+      addresses:
+        - 192.168.4.1/24  
+
   # Wireless
   wifis:
     wlan0:
