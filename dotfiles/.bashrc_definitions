@@ -18,14 +18,12 @@ export SUDO_EDITOR="vim"
 set -o vi
 
 ## ROS 
-alias ros1_melodic="source /opt/ros/melodic/setup.bash"
 alias ros1_noetic="source /opt/ros/noetic/setup.bash"
-alias ros2_eloquent="source /opt/ros/eloquent/setup.bash"
 alias ros2_foxy="source /opt/ros/foxy/setup.bash"
 
 ## FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
+export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 export FZF_COMPLETION_TRIGGER="**"
 
 ## Color debugger for python
