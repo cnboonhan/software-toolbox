@@ -7,8 +7,12 @@ toggle-hostapd-ap() {
         return
     fi
 
+    sudo systemctl stop hostapd.service
+    sudo systemctl mask hostapd.service
+
     if [ $1 == 'on' ]
     then
+        sudo touch /etc/hostapd/hostapd.conf && sudoedit /etc/hostapd/hostapd.conf
         sudo systemctl stop network-manager.service
         sudo rfkill unblock all
         sudo systemctl unmask hostapd.service
@@ -16,8 +20,6 @@ toggle-hostapd-ap() {
 
     elif [ $1 == 'off' ]
     then
-        sudo systemctl stop hostapd.service
-        sudo systemctl mask hostapd.service
         sudo systemctl start network-manager.service
     fi
 

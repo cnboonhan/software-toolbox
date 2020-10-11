@@ -18,10 +18,10 @@ tmux rename-window -t $session:0 main
 tmux select-pane -t $session:main.0
 
 tmux new-window -t $session:1 -n "hostapd" 
-tmux split-pane -t $session:hostapd.0 -v
-tmux resize-pane -t $session:hostapd.1 -y $WD
-tmux send -t $session:hostapd.0 "sudo touch /etc/hostapd/hostapd.conf && sudoedit /etc/hostapd/hostapd.conf" ENTER
-tmux send -t $session:hostapd.1 "sudo systemctl unmask hostapd && sudo rfkill unblock all && sudo systemctl start hostapd.service" 
+tmux send -t $session:hostapd.0 "toggle-hostapd-ap on" 
+
+tmux new-window -t $session:2 -n "netplan" 
+tmux send -t $session:netplan.0 "netplan-reload"
 
 # Handle both cases when tmux is already launched, or not
 if [[ ! "$TMUX" ]]; then
