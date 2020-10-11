@@ -28,6 +28,10 @@ sudo apt install htop -y
 sudo apt install time -y
 sudo apt install lsof -y
 sudo apt install bd -y
+sudo snap install usb-reset
+
+sudo snap connect usb-reset:hardware-observe core:hardware-observe
+sudo snap connect usb-reset:raw-usb core:raw-usb
 
 sudo apt update 
 
