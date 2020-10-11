@@ -40,6 +40,10 @@ network:
       addresses:
         - 192.168.4.1/24  
 
+    # usb tethering requires a simple configuration
+    usb0:
+      dhcp4: true 
+
   # Wireless
   wifis:
     wlan0:
