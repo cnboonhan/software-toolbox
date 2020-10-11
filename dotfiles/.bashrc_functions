@@ -15,34 +15,9 @@ set-title() {
     PS1=${PS1_BAK}${TITLE}
 }
 
-## Fuzzy cd, must be added here in order to enable change directory in current shell
-fzcd() {
-  source fzcmd cd $1
-}
-
-## Helper function to copy template vimspector.json templates to current directory
-ln-vimspector() {
-  if [[ -z "$1" ]]; then
-    echo "Usage: ln-vimspector [cpp|python]"
-    return
-  fi
-  cp $HOME/.vim/.vimspector.json.$1 $PWD
-}
-
 ## Helper function for PS1 modification to see git branch in terminal prompt
 parse-git-branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-
-## Introspect DBus properties of Bluetooth Interface
-bt-dbus-properties() {
-    if [ -z "$1" ]
-    then
-        echo "Enter Bluetooth Interface."
-        return
-    fi
-
-    gdbus introspect -y -d "org.bluez" -o "/org/bluez/$1"
 }
 
 swp-purge() {

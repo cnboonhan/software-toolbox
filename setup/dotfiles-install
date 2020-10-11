@@ -7,8 +7,6 @@ echo "Installing Dotfiles."
 
 mkdir -p $HOME/.vim
 cp $DOTFILES_DIR/.vimrc $HOME
-cp $DOTFILES_DIR/.vimspector.json* $HOME/.vim
-
 cp $DOTFILES_DIR/.tmux.conf $HOME
 cp $DOTFILES_DIR/.bashrc $HOME
 cp $DOTFILES_DIR/.bashrc_definitions $HOME

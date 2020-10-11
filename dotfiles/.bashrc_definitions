@@ -32,5 +32,8 @@ alias cpdb="python3 -m pdb"
 ## Improved cp
 alias rcp="rsync -a --info=progress2"
 
+## Always use ssh -X
+alias ssh="ssh -X"
+
 ## Always colorize git output
 git config --global color.status always

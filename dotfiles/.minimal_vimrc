@@ -17,18 +17,19 @@ map Q <Nop>
 """ PLUGINS 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer' } 
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } 
 Plug 'kassio/neoterm'
 Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'morhetz/gruvbox'
 Plug 'puremourning/vimspector'
+Plug 'w0rp/ale'
+Plug 'vim-scripts/a.vim'
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 call plug#end()
-
