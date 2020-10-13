@@ -1,0 +1,42 @@
+#!/bin/bash
+set -e
+
+# Create first session with meaningful name
+session=systemd
+tmux new-session -d -x "$(tput cols)" -y "$(tput lines)" -s $session || exit # Stop if duplicate sessions exist to be safe
+
+# Configuring panes to use the current terminals resolution
+WW=$(tmux display -p '#{window_width}')
+WH=$(tmux display -p '#{window_height}')
+
+WL=$(expr $WW \* 8 / 10)  # Amount to resize to the left
+WR=$(expr $WW \* 2 / 10)  # Amount to resize to the right
+WU=$(expr $WH \* 8 / 10)  # Amount to resize to the top
+WD=$(expr $WH \* 2 / 10)  # Amount to resize to the bottom
+
+# Rename first window to a standard name for consistency
+tmux rename-window -t $session:0 main
+tmux select-pane -t $session:main.0
+
+tmux new-window -t $session:1 -n "units" 
+tmux split-pane -t $session:units.0 -h
+tmux send -t $session:units.0 "cd /etc/systemd/system && ls" ENTER
+tmux send -t $session:units.1 "cd /usr/lib/systemd/system && ls" ENTER
+
+tmux new-window -t $session:2 -n "edit" 
+tmux split-pane -t $session:edit.0  -v
+tmux split-pane -t $session:edit.0  -h
+tmux resize-pane -t $session:edit.1 -y $WR
+tmux resize-pane -t $session:edit.2 -x $WD
+tmux send -t $session:edit.0 'cd /etc/systemd/system && clear' ENTER
+tmux send -t $session:edit.1 'LOG_FILE_PATH=/tmp/test-trigger.log; tail -f $LOG_FILE_PATH' 
+tmux send -t $session:edit.2 'SERVICE_NAME=systemd-template.service; sudo systemctl unmask systemd-template.service && sudo systemctl daemon-reload && sudo systemctl restart $SERVICE_NAME && journalctl -e -u $SERVICE_NAME -f' 
+
+
+# Handle both cases when tmux is already launched, or not
+if [[ ! "$TMUX" ]]; then
+  tmux attach-session -t $session:main.0
+else
+  tmux switch -t $session:main.0
+fi
+
