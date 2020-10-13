@@ -12,8 +12,8 @@ WH=$(tmux display -p '#{window_height}')
 
 WL=$(expr $WW \* 7 / 10)  # Amount to resize to the left
 WR=$(expr $WW \* 3 / 10)  # Amount to resize to the right
-WU=$(expr $WH \* 8 / 10)  # Amount to resize to the top
-WD=$(expr $WH \* 2 / 10)  # Amount to resize to the bottom
+WU=$(expr $WH \* 7 / 10)  # Amount to resize to the top
+WD=$(expr $WH \* 3 / 10)  # Amount to resize to the bottom
 
 tmux rename-window -t $session:0 udev-pane
 tmux select-pane -t $session:udev-pane.0
@@ -27,15 +27,17 @@ tmux resize-pane -t $session:udev-pane.2 -y $WD
 tmux split-pane -t $session:udev-pane.1 -v
 tmux split-pane -t $session:udev-pane.3 -h
 tmux split-pane -t $session:udev-pane.0 -h
+tmux split-pane -t $session:udev-pane.5 -h
 
 #tmux resize-pane -t $session:udev-pane.0 -x $WU
 
 tmux send -t $session:udev-pane.0 'cd /etc/udev/rules.d && clear' ENTER
 tmux send -t $session:udev-pane.1 'watch -d "ls /dev | column"' ENTER
-tmux send -t $session:udev-pane.2 'udevadm info -a -n /dev/[/dev/ttyACM* or /sys/class/net/wlan*]'
+tmux send -t $session:udev-pane.2 'udevadm info -a [/dev/ttyACM* | /sys/class/net/wlan*]'
 tmux send -t $session:udev-pane.3 'dmesg -w' ENTER
-tmux send -t $session:udev-pane.4 'watch -d "lsblk"' ENTER
+tmux send -t $session:udev-pane.4 'watch -d "ip a"' ENTER
 tmux send -t $session:udev-pane.5 'watch -d "lsusb"' ENTER
+tmux send -t $session:udev-pane.6 'watch -d "lsblk"' ENTER
 
 tmux split-pane -t $session:udev-pane.0 -v
 tmux resize-pane -t $session:udev-pane.1 -y $WD
