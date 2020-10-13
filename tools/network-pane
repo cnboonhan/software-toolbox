@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Create first session with meaningful name
 session=network
