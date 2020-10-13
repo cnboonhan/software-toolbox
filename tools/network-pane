@@ -27,11 +27,14 @@ tmux send -t $session:dnsmasq.2 "toggle-dnsmasq on"
 
 tmux new-window -t $session:2 -n "hostapd" 
 tmux split-pane -t $session:hostapd.0 -h
-tmux send -t $session:hostapd.0 "toggle-routing on [iface1] [iface2] && toggle-hostapd-ap on" 
+tmux send -t $session:hostapd.0 'IFACE1=wlan0 IFACE2=eth0; toggle-routing on $IFACE1 $IFACE2 && toggle-hostapd-ap on'
 tmux send -t $session:hostapd.1 "journalctl -e -u hostapd.service -f" ENTER
 
 tmux new-window -t $session:3 -n "netplan" 
+tmux split-pane -t $session:netplan.0 -h
+tmux resize-pane -t $session:netplan.1 -x $WR
 tmux send -t $session:netplan.0 "netplan-reload"
+tmux send -t $session:netplan.1 'WLAN_IFACE=wlan0; wifi-scan $WLAN_IFACE'
 
 # Handle both cases when tmux is already launched, or not
 if [[ ! "$TMUX" ]]; then

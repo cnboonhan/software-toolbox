@@ -42,7 +42,7 @@ tmux send -t $session:udev-pane.1 'sudo udevadm control --reload && sudo udevadm
 
 tmux split-pane -t $session:udev-pane.2 -v
 tmux resize-pane -t $session:udev-pane.3 -y $WD
-tmux send -t $session:udev-pane.3 'tail -f [log-file-from-triggered-script]'
+tmux send -t $session:udev-pane.3 'TRIGGER_LOG_PATH=/tmp/test-trigger.log; tail -f $TRIGGER_LOG_PATH'
 
 if [[ ! "$TMUX" ]]; then
   tmux attach-session -t $session:udev-pane.0
