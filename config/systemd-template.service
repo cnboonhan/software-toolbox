@@ -3,7 +3,7 @@
 # Information not specifically related to the type of the unit
 
 # Text description
-Description=Template for a systemd service
+Description=Template for a systemd service 
 # This unit is started only after the following units have loaded
 After=network.target
 # Systemd will attempt to bringup Requires units, and will deactivate this unit if unsuccessful
@@ -12,14 +12,32 @@ Requires=avahi-daemon.socket
 # Wants=
 
 # Interval to check the Burst count
-StartLimitIntervalSec=200
-# Units that restart n times per StartLimitIntervalSec will not be allowed to restart
-StartLimitBurst=5
+StartLimitIntervalSec=12
+# Units that restart n times per StartLimitIntervalSec will not be allowed to restart 
+StartLimitBurst=3
 
 [Service]
 # https://www.freedesktop.org/software/systemd/man/systemd.service.html
-#
-# Command or path to script to run
+
+# The main process is specified in the ExecStart line
+Type=simple
+# When ExecStart command is expected to launch a child process and parent process should die
+#Type=forking 
+# When process is expected to finish its job before other units are launched
+#Type=oneshot 
+# When the daemon is expected to get a name from DBus
+#Type=dbus    
+# Daemon expected to send a notification via sd_notify
+#Type=notify  
+
+# Run as User
+#User=root
+# Run as Group
+#Group=root      
+# Working directory
+#WorkingDirectory=/home/bhan 
+
+# Command or path to script to run 
 ExecStart=/usr/local/bin/test-trigger
 # Command to run when stopping
 #ExecStop=
@@ -27,37 +45,21 @@ ExecStart=/usr/local/bin/test-trigger
 #ExecReload=
 # Command to run after starting
 #ExecStartPost=
-# Command to run after after stopping
+# Command to run after after stopping 
 #ExecStopPost=
 
-# The main process is specified in the ExecStart line
-Type=simple
-# When ExecStart command is expected to launch a child process and parent process should die
-#Type=forking
-# When process is expected to finish its job before other units are launched
-#Type=oneshot
-# When the daemon is expected to get a name from DBus
-#Type=dbus
-# Daemon expected to send a notification via sd_notify
-#Type=notify
-
-# Restarting
 # Restart if fails. Alternatives are no, on-success, on-failure, on-abnormal, on-watchdog, on-abort
 Restart=always
 # Restart after x seconds
 RestartSec=3
 # Timeout for service startup, esle considered failed
-#TimeoutStartSec=10
+#TimeoutStartSec=10     
 # Timeout for service stop, else considered failed
-#TimeoutStopSec=10
+#TimeoutStopSec=10      
 # Both TimeoutStartSec and TimeoutStopSec
-#TimeoutSec=10
+#TimeoutSec=10          
 # Service terminated and failed after x seconds of runtime
 #RuntimeMaxSec=12
-
-#User=root              # Only this User can run
-#Group=wireshark        # Only wireshark group can run
-#WorkingDirectory=/ # Working directory
 
 # Keep as active after command is executed. Will prevent restarts
 #RemainAfterExit=yes
@@ -69,5 +71,3 @@ RestartSec=3
 # For system level services, use `multi-user.target`
 [Install]
 WantedBy=default.target
-
-
