@@ -5,6 +5,7 @@ netplan-reload() {
 
     sudoedit /etc/netplan/*
     echo "Reloading Netplan.."
+    sudo systemctl daemon-reload
     sudo netplan generate --debug
     sudo netplan apply
     sudo systemctl daemon-reload
