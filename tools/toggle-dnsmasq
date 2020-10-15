@@ -10,6 +10,7 @@ toggle-dnsmasq() {
 
     if [ $1 == 'on' ]
     then
+        sudo touch /etc/dnsmasq.conf && sudoedit /etc/dnsmasq.conf
         sudo systemctl disable systemd-resolved.service
         sudo systemctl stop systemd-resolved.service
         sudo systemctl mask systemd-resolved.service

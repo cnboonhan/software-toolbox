@@ -20,16 +20,15 @@ tmux select-pane -t $session:main.0
 
 tmux new-window -t $session:1 -n "dnsmasq" 
 tmux split-pane -t $session:dnsmasq.0 -v
-tmux split-pane -t $session:dnsmasq.0 -h
-tmux resize-pane -t $session:dnsmasq.2 -y $WD
-tmux send -t $session:dnsmasq.0 "sudoedit /etc/dnsmasq.conf" ENTER
+tmux send -t $session:dnsmasq.0 "toggle-dnsmasq on" ENTER
 tmux send -t $session:dnsmasq.1 "journalctl -e -u dnsmasq.service -f" ENTER
-tmux send -t $session:dnsmasq.2 "toggle-dnsmasq on" 
 
 tmux new-window -t $session:2 -n "hostapd" 
 tmux split-pane -t $session:hostapd.0 -h
-tmux send -t $session:hostapd.0 'IFACE1=wlan0 IFACE2=eth0; toggle-routing on $IFACE1 $IFACE2 && toggle-hostapd-ap on'
-tmux send -t $session:hostapd.1 "journalctl -e -u hostapd.service -f" ENTER
+tmux split-pane -t $session:hostapd.0 -v
+tmux send -t $session:hostapd.0 'IFACE1=wlan0 IFACE2=eth0; toggle-routing on $IFACE1 $IFACE2'
+tmux send -t $session:hostapd.1 'toggle-hostapd-ap on'
+tmux send -t $session:hostapd.2 "journalctl -e -u hostapd.service -f" ENTER
 
 tmux new-window -t $session:3 -n "netplan" 
 tmux split-pane -t $session:netplan.0 -h
