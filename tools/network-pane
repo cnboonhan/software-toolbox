@@ -9,15 +9,15 @@ tmux new-session -d -x "$(tput cols)" -y "$(tput lines)" -s $session || exit # S
 WW=$(tmux display -p '#{window_width}')
 WH=$(tmux display -p '#{window_height}')
 
-WL=$(expr $WW \* 8 / 10)  # Amount to resize to the left
-WR=$(expr $WW \* 2 / 10)  # Amount to resize to the right
+WL=$(expr $WW \* 7 / 10)  # Amount to resize to the left
+WR=$(expr $WW \* 3 / 10)  # Amount to resize to the right
 WU=$(expr $WH \* 8 / 10)  # Amount to resize to the top
 WD=$(expr $WH \* 2 / 10)  # Amount to resize to the bottom
 
 # Rename first window to a standard name for consistency
 tmux rename-window -t $session:0 main
 tmux select-pane -t $session:main.0
-tmux send -t $session:main.0 "dmesg -w"
+tmux send -t $session:main.0 'WLAN_IFACE=wlan0; wifi-scan $WLAN_IFACE'
 
 tmux new-window -t $session:1 -n "dnsmasq" 
 tmux split-pane -t $session:dnsmasq.0 -v
@@ -35,7 +35,7 @@ tmux new-window -t $session:3 -n "netplan"
 tmux split-pane -t $session:netplan.0 -h
 tmux resize-pane -t $session:netplan.1 -x $WR
 tmux send -t $session:netplan.0 "netplan-reload"
-tmux send -t $session:netplan.1 'WLAN_IFACE=wlan0; wifi-scan $WLAN_IFACE'
+tmux send -t $session:netplan.1 "dmesg -w" ENTER
 
 # Handle both cases when tmux is already launched, or not
 if [[ ! "$TMUX" ]]; then
