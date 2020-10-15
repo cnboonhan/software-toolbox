@@ -17,10 +17,11 @@ WD=$(expr $WH \* 2 / 10)  # Amount to resize to the bottom
 # Rename first window to a standard name for consistency
 tmux rename-window -t $session:0 main
 tmux select-pane -t $session:main.0
+tmux send -t $session:main.0 "dmesg -w"
 
 tmux new-window -t $session:1 -n "dnsmasq" 
 tmux split-pane -t $session:dnsmasq.0 -v
-tmux send -t $session:dnsmasq.0 "toggle-dnsmasq on" ENTER
+tmux send -t $session:dnsmasq.0 "toggle-dnsmasq on"
 tmux send -t $session:dnsmasq.1 "journalctl -e -u dnsmasq.service -f" ENTER
 
 tmux new-window -t $session:2 -n "hostapd" 
