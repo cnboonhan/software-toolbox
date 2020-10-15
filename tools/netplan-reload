@@ -4,14 +4,24 @@ set -e
 netplan-reload() {
 
     sudoedit /etc/netplan/*
+    clear
+    
+    echo "Enabling NetworkManager"
+    sudo systemctl unmask network-manager.service
+    sudo systemctl enable network-manager.service
+    sudo systemctl start network-manager.service
+
     echo "Reloading Netplan.."
     sudo systemctl daemon-reload
     sudo netplan generate --debug
     sudo netplan apply
     sudo systemctl daemon-reload
+
     echo "Unblocking wireless devices.."
     sudo rfkill unblock all
-    watch ip a
+
+    clear
+    journalctl -u systemd-networkd -f
 
 }
 

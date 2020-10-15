@@ -30,6 +30,7 @@ sudo apt install sysstat -y
 sudo apt install nftables -y
 sudo apt install rfkill -y
 sudo apt install iptables-persistent -y
+sudo apt install aircrack-ng -y
 
 sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
 sudo setcap 'CAP_NET_ADMIN+eip CAP_NET_RAW+eip' /usr/bin/wavemon
