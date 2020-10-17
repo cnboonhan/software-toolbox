@@ -20,6 +20,7 @@ sudo apt install libncurses5 -y # Fixes some Clangd issues on Raspberry Pi
 sudo apt install flake8 -y
 sudo apt install python3-pip -y
 sudo apt install vim-gtk -y # For copying to system clipboard
+sudo apt install clang-format -y
 pip3 install --upgrade autopep8
 pip3 install doq
 
