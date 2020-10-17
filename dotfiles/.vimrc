@@ -59,7 +59,7 @@ let g:pydocstring_doq_path = '/usr/local/bin/doq'
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 " ALE
-let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {'python': ['flake8'], 'c': ['null'], 'cpp': ['null']}
 let g:ale_fixers = {'python': ['autopep8']}
 "let g:ale_fix_on_save = 1
 let g:ale_python_flake8_options = '--ignore=A003,D400,D205,D107,D102,E111,F841'
