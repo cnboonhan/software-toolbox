@@ -1,0 +1,50 @@
+#!/bin/bash
+
+ping-test() {
+  if [ $1 == '-h' ]
+  then
+    echo "Usage: ping-test [ip-address] [ping-count] [target-device-name] [timeout]"
+    return
+  fi
+
+  if [ -z $1 ]
+  then
+      echo "Enter IP address to ping"
+      return
+  fi
+
+  if [ -z $2 ]
+  then
+      echo "Enter name of device you are pinging."
+      return
+  fi
+
+  if [ -z $3 ]
+  then
+      timeout=1                                 # Timeout in seconds for each ping
+  else
+      timeout=$3                          
+  fi
+
+  clear
+
+  while true ; do
+      ping -c 1 -i $timeout $1  >> /dev/null           # Try once.
+      rc=$?
+      
+      clear
+      echo -e "\033[36mPinging $1 ($2) with timeout of $timeout.\033[0m"
+
+      if [[ $rc -eq 0 ]] ; then                  # Make final determination.
+        echo -e "\033[32m$2 is up as of `date`.\033[0m"
+      else
+        echo -e "\033[31m$2 is down as of `date`.\033[0m"
+      fi
+      
+      sleep 1
+  done
+
+}
+
+export -f ping-test
+ping-test $1 $2 $3
