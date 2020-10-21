@@ -1,25 +1,25 @@
 #!/bin/bash
 
 ping-test() {
-  if [ $1 == '-h' ]
+  if [[ $1 == "-h" ]]
   then
     echo "Usage: ping-test [ip-address] [ping-count] [target-device-name] [timeout]"
     return
   fi
 
-  if [ -z $1 ]
+  if [[ -z $1 ]]
   then
       echo "Enter IP address to ping"
       return
   fi
 
-  if [ -z $2 ]
+  if [[ -z $2 ]]
   then
       echo "Enter name of device you are pinging."
       return
   fi
 
-  if [ -z $3 ]
+  if [[ -z $3 ]]
   then
       timeout=1                                 # Timeout in seconds for each ping
   else

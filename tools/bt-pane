@@ -43,4 +43,4 @@ fi
 }
 
 export -f bt-pane
-bt-pane
+bt-pane 
