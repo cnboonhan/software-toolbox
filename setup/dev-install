@@ -36,6 +36,7 @@ sudo snap connect usb-reset:raw-usb core:raw-usb
 
 pip3 install jupyterlab
 pip3 install pdbpp
+pip3 install gevent
 pip3 install gdbgui
 
 # see udev in dmesg / syslog
