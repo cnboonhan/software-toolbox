@@ -35,6 +35,16 @@ Plug 'vim-scripts/a.vim'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 call plug#end()
 
+" Get paths of current file in buffer
+" relative path (src/foo.txt)
+nnoremap <leader>cp :let @+=expand("%")<CR>
+" absolute path (/something/src/foo.txt)
+nnoremap <leader>cP :let @+=expand("%:p")<CR>
+" filename (foo.txt)
+nnoremap <leader>cf :let @+=expand("%:t")<CR>
+" directory name (/something/src)
+nnoremap <leader>cd :let @+=expand("%:p:h")<CR>
+
 " colorscheme
 syntax enable
 set background=dark
