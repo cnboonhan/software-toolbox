@@ -34,10 +34,11 @@ sudo snap install usb-reset
 sudo snap connect usb-reset:hardware-observe core:hardware-observe
 sudo snap connect usb-reset:raw-usb core:raw-usb
 
+pip3 install wheel
+pip3 install gdbgui
+
 pip3 install jupyterlab
 pip3 install pdbpp
-pip3 install gevent
-pip3 install gdbgui
 
 # see udev in dmesg / syslog
 sudo udevadm control --log-priority=info
