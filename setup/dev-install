@@ -28,7 +28,9 @@ sudo apt install htop -y
 sudo apt install time -y
 sudo apt install lsof -y
 sudo apt install bd -y
+sudo apt install gdb gdb-multiarch -y
 sudo apt install chrony -y
+sudo apt install bear -y
 sudo snap install usb-reset
 
 sudo snap connect usb-reset:hardware-observe core:hardware-observe
