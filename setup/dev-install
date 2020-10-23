@@ -36,25 +36,12 @@ sudo snap connect usb-reset:raw-usb core:raw-usb
 
 pip3 install jupyterlab
 pip3 install pdbpp
+pip3 install gdbgui
 
 # see udev in dmesg / syslog
 sudo udevadm control --log-priority=info
 
 sudo apt update 
-
-# Install CGDB
-[ -d "$HOME/cgdb" ] && yes | rm -r $HOME/cgdb
-sudo apt install texinfo flex libreadline-dev libncurses5-dev automake -y
- sudo apt install llvm-7 clang-7 libclang-7-dev -y
-git clone git://github.com/cgdb/cgdb.git $HOME/cgdb
-cd $HOME/cgdb
-./autogen.sh
-./configure --prefix=/usr/local
-make
-sudo make install
-cd $HOME
-yes | rm -r $HOME/cgdb
-
 
 # Install ripgrep
 sudo snap install ripgrep --classic
