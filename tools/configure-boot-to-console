@@ -13,7 +13,7 @@ configure-boot-to-console() {
     sudo apt install grub2-common -y
     sudo apt install resolvconf -y
 
-    'adding and backing up grub file to /etc/default/grub.bak'
+    echo 'adding and backing up grub file to /etc/default/grub.bak'
     sudo touch /etc/default/grub
     sudo touch /etc/default/grub.bak
     sudo cp /etc/default/grub /etc/default/grub.bak
