@@ -117,7 +117,7 @@ nmap <silent>gd :YcmCompleter GoTo<CR>
 nmap <silent>gf :YcmCompleter GoToDefinition<CR>
 nmap <silent>gc :YcmCompleter GoToDeclaration<CR>
 nmap <silent>gi :YcmCompleter GoToInclude<CR>
-nmap <silent>gt :YcmCompleter GetType<CR>
+nmap <silent>t :YcmCompleter GetType<CR>
 
 " DENITE specific configurations
 " Use ripgrep for searching current directory for files
