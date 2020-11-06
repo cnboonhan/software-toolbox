@@ -9,4 +9,4 @@ cd $HOME
 git clone https://github.com/emscripten-core/emsdk.git
 cd $HOME/emsdk
 ./emsdk install latest
-
+./emsdk activate latest

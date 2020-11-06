@@ -37,3 +37,6 @@ alias ssh="ssh -X"
 
 ## Always colorize git output
 git config --global color.status always
+
+## Emscripten ( WebAssembly )
+alias wasm_emscripten="source $HOME/emsdk/emsdk_env.sh"
