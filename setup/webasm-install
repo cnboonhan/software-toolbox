@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+TOOLS_DIR=$SCRIPT_DIR/../tools
+
+echo 'Installing web assembly dependencies..'
+cd $HOME
+git clone https://github.com/emscripten-core/emsdk.git
+cd $HOME/emsdk
+./emsdk install latest
+
