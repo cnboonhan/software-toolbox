@@ -19,6 +19,7 @@ endif()
 include(GNUInstallDirs)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0") # man gcc
+set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install")
 
 include(GNUInstallDirs) # https://cmake.org/cmake/help/v3.0/module/GNUInstallDirs.html
 include(FindPkgConfig) # https://cmake.org/cmake/help/latest/module/FindPkgConfig.html
