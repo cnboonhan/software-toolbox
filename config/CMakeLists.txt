@@ -29,9 +29,9 @@ include(GNUInstallDirs) # https://cmake.org/cmake/help/v3.0/module/GNUInstallDir
 include(FindPkgConfig) # https://cmake.org/cmake/help/latest/module/FindPkgConfig.html
 include(CMakePackageConfigHelpers) # https://cmake.org/cmake/help/latest/module/CMakePackageConfigHelpers.html
 
-#find_package(lib_ext REQUIRED lib_name)
+#find_package(lib_ext REQUIRED)
 #if(NOT lib_ext)
-  #message(FATAL_ERROR "lib_name library not found")
+  #message(FATAL_ERROR "lib_ext library not found")
 #endif()
 
 #set(INSTALL_CONFIG_DIR "${CMAKE_INSTALL_LIBDIR}/template_cmake/cmake")
