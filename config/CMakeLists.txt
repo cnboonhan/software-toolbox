@@ -30,7 +30,7 @@ include(FindPkgConfig) # https://cmake.org/cmake/help/latest/module/FindPkgConfi
 include(CMakePackageConfigHelpers) # https://cmake.org/cmake/help/latest/module/CMakePackageConfigHelpers.html
 
 #find_package(lib_ext REQUIRED)
-#if(NOT lib_ext)
+#if(NOT lib_ext_FOUND)
   #message(FATAL_ERROR "lib_ext library not found")
 #endif()
 
