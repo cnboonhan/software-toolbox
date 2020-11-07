@@ -22,7 +22,8 @@ include(GNUInstallDirs)
 #set(CMAKE_CPP_COMPILER /path/to/cpp/compiler)
 #set(CMAKE_GENERATOR "Unix Makefiles")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0") # man gcc
-set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install")
+set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS}")
+#set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install")
 #set(CMAKE_EXECUTABLE_SUFFIX ".html")
 
 include(GNUInstallDirs) # https://cmake.org/cmake/help/v3.0/module/GNUInstallDirs.html
