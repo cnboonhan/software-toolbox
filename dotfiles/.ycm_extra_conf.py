@@ -31,7 +31,6 @@ CPP_BASE_FLAGS = [
     '-xc++',
     '-I/usr/lib/',
     '-I/usr/include/',
-    '-I/usr/include/SDL2'
 ]
 
 C_SOURCE_EXTENSIONS = [
