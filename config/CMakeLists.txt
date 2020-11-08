@@ -19,7 +19,7 @@ endif()
 include(GNUInstallDirs)
 
 #set(CMAKE_C_COMPILER /path/to/c/compiler)
-#set(CMAKE_CPP_COMPILER /path/to/cpp/compiler)
+#set(CMAKE_CXX_COMPILER /path/to/cpp/compiler)
 #set(CMAKE_GENERATOR "Unix Makefiles")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0") # man gcc
 set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS}")
