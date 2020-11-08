@@ -67,6 +67,7 @@ let g:pydocstring_doq_path = '/usr/local/bin/doq'
 
 " YouCompletMe
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_confirm_extra_conf=0
 
 " ALE
 let g:ale_linters = {'python': ['flake8'], 'c': ['null'], 'cpp': ['null']}
