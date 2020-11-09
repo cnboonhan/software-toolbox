@@ -41,7 +41,7 @@ sudo apt update
 sudo udevadm control --log-priority=info
 
 # Install ripgrep
-sudo snap install ripgrep --classic
+sudo apt install ripgrep -y
 
 # Install FZF
 [ -d "$HOME/.fzf" ] && yes | rm -r $HOME/.fzf 
