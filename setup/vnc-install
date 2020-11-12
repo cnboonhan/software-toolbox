@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+CONFIG_DIR=$SCRIPT_DIR/../config
+
+echo -e "Installing dependencies.."
+sudo apt install tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer -y
+echo -e "Set password"
+vncpasswd
+
+echo -e "Adding startup config file"
+cp $CONFIG_DIR/xstartup ~/.vnc
+
+echo -e "Configuring to run vncserver on startup"
+sed "s/ubuntu/$USER/g" $CONFIG_DIR/vncserver > /tmp/vncserver
+sudo mv /tmp/vncserver /etc/init.d
+sudo chmod +x /etc/init.d/vncserver
+sudo update-rc.d vncserver defaults
+
+echo -e "Vncserver should start on next boot"
+
