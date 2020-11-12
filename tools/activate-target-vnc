@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+activate-target-vnc() {
+
+    if [ $# -eq 0 ]
+      then
+        echo "Supply vnc server target: hostname@ip.address"
+        exit 1
+    fi
+
+    ssh $1 /usr/bin/vncserver :0
+    sleep 2
+    /usr/bin/vncviewer $1:0
+}
+
+export -f activate-target-vnc 
+activate-target-vnc $1

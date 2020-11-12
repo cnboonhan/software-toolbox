@@ -10,13 +10,7 @@ echo -e "Set password"
 vncpasswd
 
 echo -e "Adding startup config file"
-cp $CONFIG_DIR/xstartup ~/.vnc
+cp $CONFIG_DIR/xstartup ~/.vnc/
 
-echo -e "Configuring to run vncserver on startup"
-sed "s/ubuntu/$USER/g" $CONFIG_DIR/vncserver > /tmp/vncserver
-sudo mv /tmp/vncserver /etc/init.d
-sudo chmod +x /etc/init.d/vncserver
-sudo update-rc.d vncserver defaults
-
-echo -e "Vncserver should start on next boot"
+echo -e "Vncserver should be available now."
 
