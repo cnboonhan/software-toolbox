@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+TOOLS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+CONFIG_DIR=$TOOLS_DIR/../config
+
+toggle-startup-vnc-server() {
+    if [ "$1" != 'off' ] && [  "$1" != 'on' ]
+    then
+        echo "Enter 'off' or 'on' to toggle starting vnc server on startup."
+        return
+    fi
+
+    if [ $1 == 'on' ]
+    then
+      sudoedit /etc/systemd/system/x0vncserver.service
+      sudo systemctl unmask x0vncserver.service
+      sudo systemctl enable x0vncserver.service
+      sudo systemctl start x0vncserver.service
+      echo -e "Remember to also activate auto-login"
+
+    elif [ $1 == 'off' ]
+    then
+      sudo systemctl disable x0vncserver.service
+      sudo systemctl stop x0vncserver.service
+    fi
+}
+
+export -f toggle-startup-vnc-server
+toggle-startup-vnc-server $1

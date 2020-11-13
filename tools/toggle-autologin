@@ -1,0 +1,32 @@
+#!/bin/bash
+set -e
+
+TOOLS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+CONFIG_DIR=$TOOLS_DIR/../config
+
+toggle-autologin() {
+    if [ "$1" != 'off' ] && [  "$1" != 'on' ]
+    then
+        echo "Enter 'off' or 'on' to toggle autologin accordingly."
+        return
+    fi
+
+    if [ $1 == 'on' ]
+    then
+      echo -e "Adding lighdm configuration file"
+      sudo touch /etc/lightdm/lightdm.conf
+      sudoedit /etc/lightdm/lightdm.conf
+
+      echo -e "Applying permissions"
+      sudo groupadd -r autologin  || true
+      sudo gpasswd -a $USER autologin || true
+
+    elif [ $1 == 'off' ]
+    then
+      sudo rm /etc/lightdm/lightdm.conf
+      sudo gpasswd -d $USER autologin || true
+    fi
+}
+
+export -f toggle-autologin
+toggle-autologin $1

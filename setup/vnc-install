@@ -3,7 +3,6 @@ set -e
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 CONFIG_DIR=$SCRIPT_DIR/../config
-DOTFILES_DIR=$SCRIPT_DIR/../dotfiles
 
 echo -e "Installing dependencies.."
 sudo apt install tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer -y
@@ -11,9 +10,25 @@ sudo apt install tigervnc-scraping-server -y
 echo -e "Set password"
 vncpasswd
 
-echo -e "Adding startup config file"
+echo -e "Adding startup config file for autologin"
 cp $CONFIG_DIR/xstartup ~/.vnc/
-cp $DOTFILES_DIR/.xsessionrc ~
+sudo touch /etc/lightdm/lightdm.conf
+sed ":%s/ubuntu/$USER/g" $CONFIG_DIR/lightdm.conf > /tmp/lightdm.conf
+sudo cp /tmp/lightdm.conf /etc/systemd/system
+
+echo -e "Applying permissions"
+sudo groupadd -r autologin  || true
+sudo gpasswd -a $USER autologin || true
+
+echo -e "Run VNC server on startup"
+sudo touch /etc/systemd/system/x0vncserver.service
+sed ":%s/ubuntu/$USER/g" $CONFIG_DIR/x0vncserver.service > /tmp/x0vncserver.service
+sudo cp /tmp/x0vncserver.service /etc/systemd/system
+sudo systemctl unmask x0vncserver.service
+sudo systemctl enable x0vncserver.service
+sudo systemctl start x0vncserver.service
 
 echo -e "Vncserver should be available now."
+
+journalctl -u x0vncserver.service -f
 
