@@ -9,7 +9,7 @@ activate-target-vnc() {
         exit 1
     fi
 
-    ssh $1 "x0vncserver -passwordfile ~/.vnc/passwd -display :0 &"
+    ssh $1 "sudo systemctl lightdm start && x0vncserver -passwordfile ~/.vnc/passwd -display :0 >/dev/null 2>&1 &"
     sleep 2
     /usr/bin/vncviewer $1:0
 }
