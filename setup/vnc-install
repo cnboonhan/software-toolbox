@@ -12,6 +12,7 @@ vncpasswd
 
 echo -e "Adding startup config file for autologin"
 cp $CONFIG_DIR/xstartup ~/.vnc/
+mkdir -p /etc/lightdm
 sudo touch /etc/lightdm/lightdm.conf
 sed ":%s/ubuntu/$USER/g" $CONFIG_DIR/lightdm.conf > /tmp/lightdm.conf
 sudo cp /tmp/lightdm.conf /etc/systemd/system
