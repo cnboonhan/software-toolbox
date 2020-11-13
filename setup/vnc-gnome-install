@@ -27,5 +27,10 @@ sudo systemctl start x0vncserver.service
 
 echo -e "Vncserver should be available now."
 
+echo -e "If using Raspberry Pi, edit config.txt with the following."
+echo -e "This allows X server to start without plugging in a monitor."
+echo -e "hdmi_force_hotplug=1 hdmi_drive=2 hdmi_mode=81"
+echo -e "Visit here for more options: https://www.raspberrypi.org/documentation/configuration/config-txt/"
+
 journalctl -u x0vncserver.service -f
 
