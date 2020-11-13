@@ -10,7 +10,8 @@ toggle-autologin() {
         echo "Enter 'off' or 'on' to toggle autologin accordingly."
         return
     fi
-
+    
+    sudo apt install xfce4 -y
     mkdir -p /etc/lightdm
     sudo touch /etc/lightdm/lightdm.conf
 
