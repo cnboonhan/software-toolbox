@@ -6,6 +6,7 @@ CONFIG_DIR=$SCRIPT_DIR/../config
 
 echo -e "Installing dependencies.."
 sudo apt install tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer -y
+sudo apt install tigervnc-scraping-server -y
 echo -e "Set password"
 vncpasswd
 
