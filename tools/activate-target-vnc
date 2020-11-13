@@ -9,7 +9,7 @@ activate-target-vnc() {
         exit 1
     fi
 
-    ssh $1 /usr/bin/vncserver :0
+    ssh $1 /usr/bin/vncserver :0 -localhost no
     sleep 2
     /usr/bin/vncviewer $1:0
 }
