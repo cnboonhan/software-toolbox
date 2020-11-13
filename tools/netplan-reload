@@ -7,9 +7,9 @@ netplan-reload() {
     clear
 
     echo "Disabling NetworkManager"
-    sudo systemctl stop network-manager.service
-    sudo systemctl disable network-manager.service
-    sudo systemctl mask network-manager.service
+    sudo systemctl stop network-manager.service || true
+    sudo systemctl disable network-manager.service || true
+    sudo systemctl mask network-manager.service || true
     
     echo "Reloading Netplan.."
     sudo systemctl daemon-reload
