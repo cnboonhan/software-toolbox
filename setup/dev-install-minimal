@@ -30,6 +30,7 @@ sudo apt install lsof -y
 sudo apt install bd -y
 sudo apt install chrony -y
 sudo apt install bear -y
+sudo apt install xfce4 -y
 sudo snap install usb-reset
 
 sudo snap connect usb-reset:hardware-observe core:hardware-observe
