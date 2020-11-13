@@ -35,6 +35,7 @@ sudo apt install chrony -y
 sudo apt install bear -y
 sudo apt install xdotool -y
 sudo apt install w3m -y
+sudo apt install xfce4 -y
 sudo snap install usb-reset
 
 sudo snap connect usb-reset:hardware-observe core:hardware-observe
