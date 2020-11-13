@@ -4,10 +4,10 @@ set -e
 TOOLS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 CONFIG_DIR=$TOOLS_DIR/../config
 
-toggle-autologin() {
+toggle-autologin-xfce4() {
     if [ "$1" != 'off' ] && [  "$1" != 'on' ]
     then
-        echo "Enter 'off' or 'on' to toggle autologin accordingly."
+        echo "Enter 'off' or 'on' to toggle autologin for xfce4 environments."
         return
     fi
     
@@ -31,5 +31,5 @@ toggle-autologin() {
     fi
 }
 
-export -f toggle-autologin
-toggle-autologin $1
+export -f toggle-autologin-xfce4
+toggle-autologin-xfce4 $1

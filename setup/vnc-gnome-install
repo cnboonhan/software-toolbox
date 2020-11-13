@@ -7,7 +7,7 @@ CONFIG_DIR=$SCRIPT_DIR/../config
 echo -e "Installing dependencies.."
 sudo apt install tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer -y
 sudo apt install tigervnc-scraping-server -y
-sudo apt install xfce4 -y
+
 echo -e "Set password"
 vncpasswd
 
@@ -16,10 +16,6 @@ cp $CONFIG_DIR/xstartup ~/.vnc/
 sudo touch /etc/gdm3/custom.conf
 sed ":%s/ubuntu/$USER/g" $CONFIG_DIR/custom.conf > /tmp/custom.conf
 sudo cp /tmp/custom.conf /etc/gdm3
-
-echo -e "Applying permissions"
-sudo groupadd -r autologin  || true
-sudo gpasswd -a $USER autologin || true
 
 echo -e "Run VNC server on startup"
 sudo touch /etc/systemd/system/x0vncserver.service
