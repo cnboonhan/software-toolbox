@@ -1,13 +1,15 @@
 #!/bin/bash
 set -e
+
+echo "Installing dotfiles."
+sleep 1
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 DOTFILES_DIR=$SCRIPT_DIR/../dotfiles
 
-echo "Installing Dotfiles."
-
 mkdir -p $HOME/.vim
-cp $DOTFILES_DIR/.vimrc $HOME
-cp $DOTFILES_DIR/.tmux.conf $HOME
-cp $DOTFILES_DIR/.bashrc $HOME
-cp $DOTFILES_DIR/.bashrc_definitions $HOME
-cp $DOTFILES_DIR/.bashrc_functions $HOME
+ln -s $DOTFILES_DIR/.vimrc $HOME
+ln -s $DOTFILES_DIR/.tmux.conf $HOME
+ln -s $DOTFILES_DIR/.bashrc $HOME
+ln -s $DOTFILES_DIR/.bashrc_definitions $HOME
+ln -s $DOTFILES_DIR/.bashrc_functions $HOME

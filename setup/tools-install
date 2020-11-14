@@ -4,6 +4,6 @@ set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 TOOLS_DIR=$SCRIPT_DIR/../tools
 
-echo 'Installing tool scripts..'
+echo 'Installing helper tools.'
 sudo cp $TOOLS_DIR/* /usr/local/bin/
 

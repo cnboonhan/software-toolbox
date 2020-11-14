@@ -1,7 +1,37 @@
 # software-toolbox
-This repository aims to make it easy to install and restore my preferred working environment on a new machine / container. It also contains useful scripts and helper commands to make development more familiar.
+Cut down development time with this software bag-o-tricks!
 
-## Installation
+Contains easily modifiable [templates](config) and [configurations](dotfiles) for
+* Netplan
+* CMake
+* DHCP Server ( dnsmasq )
+* WiFi Hotspot ( hostapd )
+* Tmux ( windows and panes )
+* Vim
+* udev
+* systemd
+* YouCompleteMe ( Vim )
+* bashrc
+
+Contains useful [scripts](tools) to configure:
+* Automatic login on startup
+* Graphical interface / terminal on startup 
+* WiFi power management under NetworkManager
+* Netplan 
+* Packet forwarding between two network interfaces
+* Adding / Removing temporary swap space ( in case of insufficient RAM )
+* Trigger commands on file/folder modifications
+* Mount remote devices locally over SSH
+
+As well as various tmux configurations for easier development for
+* Bluetooth
+* Git
+* Systemd services
+* Udev 
+* Network Troubleshooting
+
+## Quick Setup 
+Note that running `dev-install` will overwrite certain [configuration files](dotfiles). Make sure to back them up!
 ```
 git clone https://github.com/cnboonhan/software-toolbox
 cd software-toolbox
@@ -9,7 +39,13 @@ cd software-toolbox
 ```
 
 ## Docker Image
-It is possible to create a Docker container with this working environment. After [installing Docker](https://docs.docker.com/engine/install/ubuntu/), and following the [post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/), do the following.
+This toolbox is available as a Docker image:
+```
+docker pull quay.io/cnboonhan/software-toolbox:latest
+docker tag quay.io/cnboonhan/software-toolbox cnboonhan/software-toolbox
+docker rmi quay.io/cnboonhan/software-toolbox
+```
+or you could build it yourself:
 
 ```
 git clone https://github.com/cnboonhan/software-toolbox
@@ -17,25 +53,3 @@ cd software-toolbox
 docker build -t cnboonhan/software-toolbox .
 docker run -it -w /home/ubuntu cnboonhan/software-toolbox /bin/bash
 ```
-
-You could also pull a docker image from my Docker Hub:
-```
-docker pull quay.io/cnboonhan/software-toolbox:latest
-docker tag quay.io/cnboonhan/software-toolbox cnboonhan/software-toolbox
-docker rmi quay.io/cnboonhan/software-toolbox
-```
-
-## Sandbox 
-A helper script has been made to quickly launch a sandbox Docker container based on `software-toolbox` image.
-```
-[PATH-to-software-toolbox-repository]/tools/sandbox
-```
-If you want to make this script easily accessible, consider copying it into one of your default executable PATHs:
-```
-sudo cp [PATH-to-software-toolbox-repository]/tools/sandbox /usr/local/bin
-# Now you can run sandbox in the shell
-sandbox # Interactive BASH terminal
-sandbox [command] # Run command and exit sandbox 
-```
-
-This would have already been done if you followed the `Installation` steps above.

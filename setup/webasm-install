@@ -4,7 +4,7 @@ set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 TOOLS_DIR=$SCRIPT_DIR/../tools
 
-echo 'Installing web assembly dependencies..'
+echo 'Installing development SDK for WebAssembly'
 cd $HOME
 git clone https://github.com/emscripten-core/emsdk.git
 cd $HOME/emsdk

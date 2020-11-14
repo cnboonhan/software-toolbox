@@ -4,6 +4,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 $SCRIPT_DIR/dotfiles-install # Do this once first for initialization purposes.
 DOTFILES_DIR=$SCRIPT_DIR/../dotfiles
 
+echo "Starting minimal install of the software-toolbox."
+sleep 1
+
 sudo apt update 
 
 echo "Installing apt dependencies."

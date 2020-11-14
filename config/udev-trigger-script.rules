@@ -3,4 +3,4 @@ KERNELS=="3-1.4",\ # Specific USB port
 SUBSYSTEM=="tty",\
 ATTRS{idVendor}=="1366",\
 ATTRS{idProduct}=="0105",\
-RUN+="/usr/local/bin/test-trigger"
+RUN+="/usr/local/bin/bt-test-trigger"

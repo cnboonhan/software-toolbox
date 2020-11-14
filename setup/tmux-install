@@ -4,7 +4,7 @@ set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 DOTFILES_DIR=$SCRIPT_DIR/../dotfiles
 
-echo "Installing tmux"
+echo "Installing Tmux"
 sudo apt update 
 
 sudo apt install tmux -y

@@ -4,6 +4,7 @@ set -e
 tb-conf-netplan() {
 
   echo "Configuration Steps for Netplan network configuration"
+  echo "Find example configuration files in software-toolbox/config"
 
   sudoedit /etc/netplan/*
   clear
