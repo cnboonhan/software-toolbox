@@ -1,5 +1,5 @@
 # software-toolbox
-Cut down development / troubleshooting time with this software bag-o-tricks!
+Cut down development / troubleshooting time with this software bag-o-tricks! Now available as a [Docker image](https://github.com/cnboonhan/software-toolbox#docker-image).
 
 Especially useful for multi device headless setups. Includes:
 
