@@ -1,3 +1,5 @@
+# Runs the script bt-test-trigger which appends to /tmp/test-trigger.log
+# Use bt-udev-pane (software-toolbox) for useful commands to configure this udev file
 KERNEL=="tty*",\ 
 KERNELS=="3-1.4",\ # Specific USB port
 SUBSYSTEM=="tty",\
