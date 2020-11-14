@@ -5,7 +5,7 @@ Especially useful for multi device headless setups. Includes:
 
 Automatic installation of various useful software, such as [general development](https://github.com/cnboonhan/software-toolbox/blob/master/setup/dev-install), [code editing](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vim-install) and [network troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/setup/network-tools-install), [docker](https://github.com/cnboonhan/software-toolbox/tree/master/setup) and [nodeJS](https://github.com/cnboonhan/software-toolbox/blob/master/setup/node-install).
 
-Easily modifiable and well commented [templates](config) for various Linux administration files
+Easily modifiable and well commented [templates](config) for various Linux administration files:
 * [Netplan](https://github.com/cnboonhan/software-toolbox/blob/master/config/01-netplan-config.yaml)
 * [CMake](https://github.com/cnboonhan/software-toolbox/blob/master/config/CMakeLists.txt)
 * [DHCP Server ( dnsmasq )](https://github.com/cnboonhan/software-toolbox/blob/master/config/dnsmasq.conf)
@@ -37,7 +37,7 @@ As well as various tmux configurations for easier development for
 * [Git](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-git-pane)
 * [Systemd](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-systemd-pane) 
 * [Udev](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-udev-pane) 
-* [Network Troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-network-pane)
+* [Network Configuration](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-network-pane)
 * [General Troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-monitor-pane)
 
 ## Quick Setup 
