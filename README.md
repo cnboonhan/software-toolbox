@@ -1,6 +1,8 @@
 # software-toolbox
 Cut down development time with this software bag-o-tricks!
 
+Especially useful for multi device headless setups.
+
 Contains easily modifiable [templates](config) and [configurations](dotfiles) for
 * Netplan
 * CMake
