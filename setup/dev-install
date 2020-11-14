@@ -43,10 +43,8 @@ sudo apt install ripgrep -y
 
 echo "Installing snap dependencies."
 sudo apt install snapd -y
-sudo snap install usb-reset
 sudo snap install shfmt
-sudo snap connect usb-reset:hardware-observe core:hardware-observe
-sudo snap connect usb-reset:raw-usb core:raw-usb
+
 
 echo "Installing pip3 dependencies."
 pip3 install wheel
