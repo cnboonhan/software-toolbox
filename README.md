@@ -5,9 +5,9 @@ Especially useful for multi device headless setups. Includes:
 
 Automatic installation of various useful software, such as 
 * [general development](https://github.com/cnboonhan/software-toolbox/blob/master/setup/dev-install)
-* [code editing](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vim-install) 
-* [network troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/setup/network-tools-install) 
-* [Remote Desktop](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vnc-gnome-install)
+* [code editing (Vim + Tmux + Plugins)](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vim-install) 
+* [Network troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/setup/network-tools-install) 
+* [Remote Desktop (TigerVNC)](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vnc-gnome-install)
 * [Docker](https://github.com/cnboonhan/software-toolbox/tree/master/setup) 
 * [nodeJS](https://github.com/cnboonhan/software-toolbox/blob/master/setup/node-install).
 
