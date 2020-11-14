@@ -13,7 +13,7 @@ Easily modifiable and well commented [templates](config) for various Linux admin
 * [Tmux Scripting](https://github.com/cnboonhan/software-toolbox/blob/master/config/tmux-template)
 * [udev](https://github.com/cnboonhan/software-toolbox/blob/master/config/udev-trigger-script.rules)
 * [systemd](https://github.com/cnboonhan/software-toolbox/blob/master/config/systemd-template.service)
-* YouCompleteMe ( Vim )
+* [YouCompleteMe ( Vim )](https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.ycm_extra_conf.py)
 
 Feature packed configurations: 
 * [vim](https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.vimrc)
