@@ -3,7 +3,13 @@ Cut down development / troubleshooting time with this software bag-o-tricks!
 
 Especially useful for multi device headless setups. Includes:
 
-Automatic installation of various useful software, such as [general development](https://github.com/cnboonhan/software-toolbox/blob/master/setup/dev-install), [code editing](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vim-install) and [network troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/setup/network-tools-install), [Remote Desktop](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vnc-gnome-install), [docker](https://github.com/cnboonhan/software-toolbox/tree/master/setup) and [nodeJS](https://github.com/cnboonhan/software-toolbox/blob/master/setup/node-install).
+Automatic installation of various useful software, such as 
+* [general development](https://github.com/cnboonhan/software-toolbox/blob/master/setup/dev-install)
+* [code editing](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vim-install) 
+* [network troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/setup/network-tools-install) 
+* [Remote Desktop](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vnc-gnome-install)
+* [Docker](https://github.com/cnboonhan/software-toolbox/tree/master/setup) 
+* [nodeJS](https://github.com/cnboonhan/software-toolbox/blob/master/setup/node-install).
 
 Easily modifiable and well commented [templates](config) for various Linux administration files:
 * [Netplan](https://github.com/cnboonhan/software-toolbox/blob/master/config/01-netplan-config.yaml)
