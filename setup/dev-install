@@ -6,6 +6,7 @@ DOTFILES_DIR=$SCRIPT_DIR/../dotfiles
 
 sudo apt update 
 
+echo "Installing apt dependencies."
 sudo apt install cmake -y
 sudo apt install curl wget -y
 sudo apt install git -y
@@ -35,15 +36,17 @@ sudo apt install chrony -y
 sudo apt install bear -y
 sudo apt install xdotool -y
 sudo apt install w3m -y
-sudo apt install xfce4 -y
-sudo snap install usb-reset
+sudo apt install ripgrep -y
 
+echo "Installing snap dependencies."
+sudo snap install usb-reset
+sudo snap install shfmt
 sudo snap connect usb-reset:hardware-observe core:hardware-observe
 sudo snap connect usb-reset:raw-usb core:raw-usb
 
+echo "Installing pip3 dependencies."
 pip3 install wheel
 pip3 install gdbgui
-
 pip3 install jupyterlab
 pip3 install pdbpp
 
@@ -52,15 +55,12 @@ sudo udevadm control --log-priority=info
 
 sudo apt update 
 
-# Install ripgrep
-sudo apt install ripgrep -y
+echo "Installing source buids."
 
-# Install FZF
 [ -d "$HOME/.fzf" ] && yes | rm -r $HOME/.fzf 
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 yes | $HOME/.fzf/install
 
-# Install CCLS
 [ -d "$HOME/ccls" ] && yes | rm -r $HOME/ccls
 git clone --depth=1 --recursive https://github.com/MaskRay/ccls $HOME/ccls
 cd $HOME/ccls
@@ -70,6 +70,7 @@ sudo cmake --build Release --target install
 cd $HOME 
 yes | rm -r $HOME/ccls
 
+echo "Installing dedicated components."
 $SCRIPT_DIR/node-install
 $SCRIPT_DIR/vim-install
 $SCRIPT_DIR/tmux-install

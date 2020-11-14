@@ -14,19 +14,19 @@ It is possible to create a Docker container with this working environment. After
 ```
 git clone https://github.com/cnboonhan/software-toolbox
 cd software-toolbox
-docker build -t cnboonhan/software-toolbox-env .
-docker run -it -w /home/ubuntu cnboonhan/software-toolbox-env /bin/bash
+docker build -t cnboonhan/software-toolbox .
+docker run -it -w /home/ubuntu cnboonhan/software-toolbox /bin/bash
 ```
 
 You could also pull a docker image from my Docker Hub:
 ```
-docker pull quay.io/cnboonhan/software-toolbox-env:latest
-docker tag quay.io/cnboonhan/software-toolbox-env cnboonhan/software-toolbox-env
-docker rmi quay.io/cnboonhan/software-toolbox-env
+docker pull quay.io/cnboonhan/software-toolbox:latest
+docker tag quay.io/cnboonhan/software-toolbox cnboonhan/software-toolbox
+docker rmi quay.io/cnboonhan/software-toolbox
 ```
 
 ## Sandbox 
-A helper script has been made to quickly launch a sandbox Docker container based on `software-toolbox-env` image.
+A helper script has been made to quickly launch a sandbox Docker container based on `software-toolbox` image.
 ```
 [PATH-to-software-toolbox-repository]/tools/sandbox
 ```

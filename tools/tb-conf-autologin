@@ -1,0 +1,31 @@
+#!/bin/bash
+set -e
+
+TOOLS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+CONFIG_DIR=$TOOLS_DIR/../config
+
+tb-conf-autologin() {
+
+  echo "Enables or disables autologin for this user, on Gnome environments"
+
+  if [ "$1" != 'disable' ] && [ "$1" != 'enable' ]; then
+    echo "Usage: tb-conf-autologin [disable|enable]"
+    echo "Enter 'disable' or 'enable' to toggle autologin for gnome environments."
+    return
+  fi
+
+  if [ $1 == 'enable' ]; then
+    sudo sed -i '/AutomaticLoginEnable = true/s/^#*//g' /etc/gdm3/custom.conf
+    sudo sed -i "s/.*AutomaticLogin = .*/  AutomaticLogin = $USER/g" /etc/gdm3/custom.conf
+
+  elif [ $1 == 'disable' ]; then
+    sudo sed -i '/AutomaticLoginEnable = true/s/^#*/#/g' /etc/gdm3/custom.conf
+    sudo sed -i '/AutomaticLogin = /s/^#*/#/g' /etc/gdm3/custom.conf
+  fi
+
+  sed ":%s/ubuntu/$USER/g" /etc/gdm3/custom.conf >/tmp/custom.conf
+  sudo cp /tmp/custom.conf /etc/gdm3
+}
+
+export -f tb-conf-autologin
+tb-conf-autologin $1

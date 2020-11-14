@@ -1,0 +1,41 @@
+#!/bin/bash
+
+tb-run-cmd-on-update() {
+
+  echo "Runs a command every time a target file/folder is updated."
+
+  if [ -z "$1" ]; then
+    echo "Usage: tb-run-cmd-on-update [file/folder to watch] [cmd to run]"
+    exit
+  fi
+
+  if [ -z "$2" ]; then
+    echo "Usage: tb-run-cmd-on-update [file/folder to watch] [cmd to run]"
+    exit
+  fi
+
+  echo "executing $2 on update of $1"
+
+  if [ -f $1 ]; then
+    echo "file was provided."
+
+    while :; do
+      inotifywait -q -e close_write $1 | eval $2
+    done
+
+  elif [ -d $1 ]; then
+    echo "directory was provided."
+
+    while :; do
+      inotifywait -q -e close_write -r -m $1 | eval $2
+    done
+
+  else
+    echo "$1 is neither a directory nor a file."
+  fi
+
+}
+
+export -f tb-run-cmd-on-update
+
+tb-run-cmd-on-update "$1" "$2"

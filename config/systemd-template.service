@@ -38,7 +38,7 @@ Type=simple
 #WorkingDirectory=/home/bhan 
 
 # Command or path to script to run 
-ExecStart=/usr/local/bin/test-trigger
+ExecStart=/usr/local/bin/tb-test-trigger
 # Command to run when stopping
 #ExecStop=
 # Command to run when reloading

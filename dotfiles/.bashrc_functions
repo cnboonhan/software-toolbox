@@ -51,3 +51,23 @@ sudo iw dev $1 scan ap-force | grep -E 'SSID: [[:print:]]+'
 git-pull-all() {
     find . -type d -name .git -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;
 }
+
+fzgrep() {
+
+  if [ -z "$1" ]; then
+    echo "Usage: fzgrep [path-to-search]"
+    echo "This will use FZF to search for a term within files in [path-to-search], and open to the selected line in vim"
+    return
+  fi
+
+  out=$(grep -rnw . -e "$1" | fzf)
+  if [[ -z "$out" ]]; then
+    return
+
+  else
+    target_file=$(echo $out | cut -d':' -f1)
+    target_line=$(echo $out | cut -d':' -f2)
+    vim +$target_line $target_file
+  fi
+
+}

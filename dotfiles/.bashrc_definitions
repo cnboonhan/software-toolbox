@@ -2,9 +2,9 @@
 export TERM=xterm-256color
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ## View current git branch in terminal prompt
 export PS1='\[\e[1m\e[34m\]\u@\h\[\e[0m\]:\[\e[1m\e[32m\]\w \[\e[91m\]$(parse-git-branch)\[\e[0m\]$ '
@@ -21,6 +21,9 @@ set -o vi
 alias ros1_noetic="source /opt/ros/noetic/setup.bash"
 alias ros2_foxy="source /opt/ros/foxy/setup.bash"
 
+## Emscripten ( WebAssembly )
+alias wasm_emscripten="source $HOME/emsdk/emsdk_env.sh"
+
 ## FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
@@ -29,14 +32,8 @@ export FZF_COMPLETION_TRIGGER="**"
 ## Color debugger for python
 alias cpdb="python3 -m pdb"
 
-## Improved cp
-alias rcp="rsync -a --info=progress2"
-
 ## Always use ssh -X
 alias ssh="ssh -X"
 
 ## Always colorize git output
 git config --global color.status always
-
-## Emscripten ( WebAssembly )
-alias wasm_emscripten="source $HOME/emsdk/emsdk_env.sh"

@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.2)
 
+## Template CMakeLists.txt to be easily modifiable for various builds ##
+
 project(template_cmake)
 
-# Default to C++14
+## Set up build environment ##
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
 endif()
@@ -22,18 +24,41 @@ include(GNUInstallDirs)
 #set(CMAKE_CXX_COMPILER /path/to/cpp/compiler)
 #set(CMAKE_GENERATOR "Unix Makefiles")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0") # man gcc
-set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS}")
+set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS}") # https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html
 #set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install")
 #set(CMAKE_EXECUTABLE_SUFFIX ".html")
 
+## Find external packages ##
 include(GNUInstallDirs) # https://cmake.org/cmake/help/v3.0/module/GNUInstallDirs.html
 include(FindPkgConfig) # https://cmake.org/cmake/help/latest/module/FindPkgConfig.html
-include(CMakePackageConfigHelpers) # https://cmake.org/cmake/help/latest/module/CMakePackageConfigHelpers.html
 
 #find_package(lib_ext REQUIRED)
 #if(NOT lib_ext_FOUND)
   #message(FATAL_ERROR "lib_ext library not found")
 #endif()
+
+## Create executables and libraries ##
+#file(GLOB_RECURSE srcs "src/*.cpp")
+#add_library(lib_local SHARED ${srcs}) # https://cmake.org/cmake/help/latest/command/add_library.html
+#add_executable(exec_local ${srcs}) # https://cmake.org/cmake/help/latest/command/add_executable.html
+
+#target_link_libraries(target_name
+  #PUBLIC
+    #lib_ext::lib_ext # https://cmake.org/cmake/help/latest/policy/CMP0028.html
+    #lib_local
+  #PRIVATE
+  #${lib_ext_LIBRARIES}
+#)
+
+#target_include_directories(target_include
+  #PUBLIC
+    #$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    #$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    #${lib_ext_INCLUDE_DIRS}
+#)
+
+## Create Package Config for easy import from other projects ##
+#include(CMakePackageConfigHelpers) # https://cmake.org/cmake/help/latest/module/CMakePackageConfigHelpers.html
 
 #set(INSTALL_CONFIG_DIR "${CMAKE_INSTALL_LIBDIR}/template_cmake/cmake")
 #set(PACKAGE_CONFIG_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/template_cmake-version.cmake")
@@ -46,25 +71,18 @@ include(CMakePackageConfigHelpers) # https://cmake.org/cmake/help/latest/module/
   #DESTINATION ${INSTALL_CONFIG_DIR}
 #)
 
-#file(GLOB_RECURSE srcs "src/*.cpp")
-#add_library(lib_local SHARED ${srcs}) # https://cmake.org/cmake/help/latest/command/add_library.html
-
-#add_executable(exec_local ${srcs}) # https://cmake.org/cmake/help/latest/command/add_executable.html
-
-#target_link_libraries(target_name
-  #PUBLIC
-    #lib_local::lib_local # https://cmake.org/cmake/help/latest/policy/CMP0028.html
-  #PRIVATE
-  #${lib_ext_LIBRARIES}
+#configure_package_config_file(
+  #"${CMAKE_CURRENT_LIST_DIR}/cmake/template_cmake-config.cmake.in"
+  #${PACKAGE_CONFIG_FILE}
+  #INSTALL_DESTINATION ${INSTALL_CONFIG_DIR}
 #)
 
-#target_include_directories(target_include
-  #PUBLIC
-    #$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    #$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-    #${lib_ext_INCLUDE_DIRS}
+#write_basic_package_version_file(
+  #${PACKAGE_CONFIG_VERSION_FILE}
+  #COMPATIBILITY ExactVersion
 #)
 
+## Install output of build ##
 #https://cmake.org/cmake/help/git-stage/guide/importing-exporting/index.html#exporting-targets
 #install( # https://cmake.org/cmake/help/latest/command/install.html
   #TARGETS lib_local
@@ -77,14 +95,13 @@ include(CMakePackageConfigHelpers) # https://cmake.org/cmake/help/latest/module/
 #install(
   #EXPORT lib_local-targets
   #FILE lib_local-targets.cmake
-  #NAMESPACE lig_local_pkg::
+  #NAMESPACE lib_local_pkg::
   #DESTINATION ${INSTALL_CONFIG_DIR}
 #)
 
 #install(DIRECTORY misc/ DESTINATION share/${PROJECT_NAME}/misc)
 #install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-#https://cmake.org/pipermail/cmake/2013-April/054247.html
 #export(
   #EXPORT lib_local-targets
   #FILE ${CMAKE_CURRENT_BINARY_DIR}/lib_local-targets.cmake

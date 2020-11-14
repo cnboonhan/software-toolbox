@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+tb-generate-ssh-key() {
+  
+  echo "Generates SSH Key for authentication."
+
+  if [ $# -eq 0 ]; then
+    echo "Usage: tb-generate-ssh-key [your-email]"
+    exit 1
+  fi
+
+  echo "Installing dependencies"
+  sudo apt-get install xclip -y
+  ssh-keygen -t rsa -b 4096 -C $1
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_rsa
+
+  echo 'public key has been copied to system clipboard'
+  xclip -sel clip <~/.ssh/id_rsa.pub
+
+}
+
+export -f tb-generate-ssh-key
+tb-generate-ssh-key $1

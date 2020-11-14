@@ -3,13 +3,13 @@ network:
   renderer: networkd 
   # renderer: NetworkManager
 
-  # Wired
+  ## Wired Connections ##
   ethernets:
     # Dynamic IP
     eth0:
       dhcp4: true
       gateway4: 192.168.0.1 # Adds a default route manually
-      routes:
+      routes:  # Static routes
         - to: 192.168.1.0/24
           via: 192.168.0.1
           # on-link:  true # For when gateway is an ip address directly connected to network, even when the address does not match the subnet
@@ -35,17 +35,17 @@ network:
         use-routes: false # Prevent default route from DHCP server from being used
         route-metric: 100 # Priority of this route in making routing decisions
 
-    # hostapd wifi hotspots are put under ethernets and need a static ip
+    # wifi hotspots from hostapd need to be under ethernets and need a static ip
     wlan-hostapd:
       dhcp4: false
       addresses:
         - 192.168.4.1/24  
 
-    # usb tethering requires a simple configuration
+    # for usb tethering
     usb0:
       dhcp4: true 
 
-  # Wireless
+  ## Wireless Connections ##
   wifis:
     wlan0:
       # Dynamic IP

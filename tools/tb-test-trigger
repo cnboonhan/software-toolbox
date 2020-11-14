@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-test-trigger() {
+tb-test-trigger() {
 
     # PARENT_COMMAND=$(ps -o comm=$PPID)
     # PARENT_COMMAND=$(ps -o args=$PPID) # More detail
@@ -23,5 +23,5 @@ test-trigger() {
 
 }
 
-export -f test-trigger
-test-trigger $1
+export -f tb-test-trigger
+tb-test-trigger $1

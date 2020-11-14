@@ -1,81 +1,89 @@
 #!/bin/bash
 set -e
 
-function sandbox-helper()
-{
-  [ ! -z $(docker images -q cnboonhan/software-toolbox-env) ] || ( echo "please pull docker image: docker pull cnboonhan/software-toolbox-env, or build software-toolbox-env first: 'docker build -t cnboonhan/software-toolbox-env [software-toolbox PATH]'" && return )
+function sandbox-helper() {
+  [ ! -z $(docker images -q cnboonhan/software-toolbox-env) ] || (echo "please pull or build the sandbox docker image." && return)
 
   # Reset the SandboxNet Docker Network
   NET_EXISTS="$(docker network inspect $(docker network ls -q) | grep $2)"
 
-  if [ $2 == "SandboxNet" ] 
-  then
+  if [ $2 == "SandboxNet" ]; then
 
-    if [ ! -z "$NET_EXISTS" ]
-    then
-      docker network rm $2 &> /dev/null
-    fi 
+    if [ ! -z "$NET_EXISTS" ]; then
+      docker network rm $2 &>/dev/null
+    fi
 
-    docker network create --subnet=10.233.0.0/24 SandboxNet &> /dev/null
+    docker network create --subnet=10.233.0.0/24 SandboxNet &>/dev/null
   fi
 
   echo -e "Configuration\n\nCommand: $1\nNetwork Name: $2\nSandbox IP: $3\nHostname: $4\n"
   echo -e "Note that Custom IP will only propagate if the target network is not bridge or host."
 
-  if [ $2 == "bridge" ] || [ $2 == "host" ]
-  then
+  if [ $2 == "bridge" ] || [ $2 == "host" ]; then
     docker run -it --rm -w /home/ubuntu/isolation/${PWD##*/} --cap-add net_raw --cap-add net_admin --net=$2 --volume $(pwd)/..:/home/ubuntu/isolation/ --hostname $4 cnboonhan/software-toolbox-env /bin/bash -c "sleep 1; clear; $1"
   else
     docker run -it --rm -w /home/ubuntu/isolation/${PWD##*/} --cap-add net_raw --cap-add net_admin --net=$2 --ip $3 --volume $(pwd)/..:/home/ubuntu/isolation/ --hostname $4 cnboonhan/software-toolbox-env /bin/bash -c "sleep 1; clear; $1"
   fi
 
-
   echo "Restore directory to initial state? Y/y (Automatic 'No' in 1 second)"
   read -t 1 yn
 
   case $yn in
-    [Yy]* ) git restore --source=HEAD --staged --worktree -- $(pwd) ; git clean -fd $(pwd);;
-        * ) return;;
-  esac > /dev/null 2>&1
+  [Yy]*)
+    git restore --source=HEAD --staged --worktree -- $(pwd)
+    git clean -fd $(pwd)
+    ;;
+  *) return ;;
+  esac >/dev/null 2>&1
 }
 
 export -f sandbox-helper
 
-if [ ! -z $1 ] && [ $1 == "--help" ]
-then
+if [ ! -z $1 ] && [ $1 == "--help" ]; then
   echo "Usage: sandbox -c [command] -n [target-docker-network] -i [sandbox-ip] -h [host-name]"
   echo "To use multiple sandboxes at once, either set a unique ip address for each of them (-i x.x.x.x), or use a bridge network (-n bridge)."
   exit
 fi
 
 while [[ "$#" -gt 0 ]]; do
-    case $1 in
-        -c|--cmd) CMD="$2"; shift ;;
-        -n|--net) TARGET_NET="$2"; shift ;;
-        -i|--ip) TARGET_IP="$2"; shift ;;
-        -h|--host) TARGET_HOSTNAME="$2"; shift ;;
-        *) echo "Unknown parameter passed: $1"; exit 1 ;;
-    esac
+  case $1 in
+  -c | --cmd)
+    CMD="$2"
     shift
+    ;;
+  -n | --net)
+    TARGET_NET="$2"
+    shift
+    ;;
+  -i | --ip)
+    TARGET_IP="$2"
+    shift
+    ;;
+  -h | --host)
+    TARGET_HOSTNAME="$2"
+    shift
+    ;;
+  *)
+    echo "Unknown parameter passed: $1"
+    exit 1
+    ;;
+  esac
+  shift
 done
 
-if [ -z "$CMD" ]
-then
+if [ -z "$CMD" ]; then
   CMD="bash"
 fi
 
-if [ -z "$TARGET_NET" ]
-then
+if [ -z "$TARGET_NET" ]; then
   TARGET_NET="SandboxNet"
 fi
 
-if [ -z "$TARGET_IP" ] 
-then
+if [ -z "$TARGET_IP" ]; then
   TARGET_IP="10.233.0.100"
 fi
 
-if [ -z "$TARGET_HOSTNAME" ]
-then
+if [ -z "$TARGET_HOSTNAME" ]; then
   TARGET_HOSTNAME="sandbox"
 fi
 

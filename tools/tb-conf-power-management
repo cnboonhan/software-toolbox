@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+tb-conf-power-management() {
+  echo "Configuration Steps for Wifi power management setting under NetworkManager"
+
+  if [ "$1" != 'disable' ] && [ "$1" != 'enable' ]; then
+    echo "Usage: tb-conf-power-management [disable|enable]"
+    return
+  fi
+
+  if [ $1 == 'enable' ]; then
+    echo "Enabling wifi power management"
+    sudo sed -i s/wifi.powersave\ =\ ./wifi.powersave\ =\ 2/ /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+
+  elif [ $1 == 'disable' ]; then
+    echo "Disabling wifi power management"
+    sudo sed -i s/wifi.powersave\ =\ ./wifi.powersave\ =\ 3/ /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+  fi
+
+  cat /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+}
+
+export -f tb-conf-power-management
+tb-conf-power-management $1

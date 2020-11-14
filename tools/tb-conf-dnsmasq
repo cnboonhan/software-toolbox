@@ -1,0 +1,40 @@
+#!/bin/bash
+set -e
+
+tb-conf-dnsmasq() {
+
+  echo "Configuration Steps for dnsmasq DHCP Server"
+
+  if [ "$1" != 'disable' ] && [ "$1" != 'enable' ]; then
+    echo "Usage: tb-conf-dnsmasq [disable|enable]"
+    return
+  fi
+
+  if [ $1 == 'enable' ]; then
+    echo "Enabling dnsmasq DHCP Server"
+    sudo touch /etc/dnsmasq.conf && sudoedit /etc/dnsmasq.conf
+    sudo systemctl disable systemd-resolved.service
+    sudo systemctl stop systemd-resolved.service
+    sudo systemctl mask systemd-resolved.service
+    sudo rfkill unblock all
+    sudo systemctl unmask dnsmasq.service
+    sudo systemctl enable dnsmasq.service
+    sudo systemctl start dnsmasq.service
+
+  elif [ $1 == 'disable' ]; then
+    echo "Disabling dnsmasq DHCP Server"
+    sudo systemctl disable dnsmasq.service
+    sudo systemctl stop dnsmasq.service
+    sudo systemctl mask dnsmasq.service
+    sudo rfkill unblock all
+    sudo systemctl unmask systemd-resolved.service
+    sudo systemctl enable systemd-resolved.service
+    sudo systemctl start systemd-resolved.service
+  fi
+
+  echo "Displaying Logs"
+  journalctl -u dnsmasq.service -f
+}
+
+export -f tb-conf-dnsmasq
+tb-conf-dnsmasq $1

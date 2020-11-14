@@ -1,0 +1,32 @@
+#!/bin/bash
+set -e
+
+tb-conf-hostapd() {
+  echo "Configuration Steps for hostapd Wifi Hotspot"
+
+  if [ "$1" != 'disable' ] && [ "$1" != 'enable' ]; then
+    echo "Usage: tb-conf-hostapd [disable|enable]"
+    return
+  fi
+
+  if [ $1 == 'enable' ]; then
+    echo "Enabling hostapt Wifi Hotspot"
+    sudo touch /etc/hostapd/hostapd.conf && sudoedit /etc/hostapd/hostapd.conf
+    sudo rfkill unblock all
+    sudo systemctl unmask hostapd.service
+    sudo systemctl start hostapd.service
+
+  elif
+    [ $1 == 'off' ]
+    echo "Disabling hostapd Wifi Hotspot"
+  then
+    sudo systemctl stop hostapd.service
+    sudo systemctl mask hostapd.service
+  fi
+
+  echo "Displaying Logs"
+  journalctl -u tb-conf-hostapd -f
+}
+
+export -f tb-conf-hostapd
+tb-conf-hostapd $1

@@ -1,0 +1,54 @@
+#!/bin/bash
+set -e
+
+tb-network-pane() {
+
+  echo "Tmux configuration for network development."
+  sleep 1
+
+  # Create first session with meaningful name
+  session=network
+  tmux new-session -d -x "$(tput cols)" -y "$(tput lines)" -s $session || exit # Stop if duplicate sessions exist to be safe
+
+  # Configuring panes to use the current terminals resolution
+  WW=$(tmux display -p '#{window_width}')
+  WH=$(tmux display -p '#{window_height}')
+
+  WL=$(expr $WW \* 7 / 10) # Amount to resize to the left
+  WR=$(expr $WW \* 3 / 10) # Amount to resize to the right
+  WU=$(expr $WH \* 8 / 10) # Amount to resize to the top
+  WD=$(expr $WH \* 2 / 10) # Amount to resize to the bottom
+
+  # Rename first window to a standard name for consistency
+  tmux rename-window -t $session:0 main
+  tmux select-pane -t $session:main.0
+  tmux send -t $session:main.0 'WLAN_IFACE=wlan0; wifi-scan $WLAN_IFACE'
+
+  tmux new-window -t $session:1 -n "dnsmasq"
+  tmux split-pane -t $session:dnsmasq.0 -v
+  tmux send -t $session:dnsmasq.0 "toggle-dnsmasq on"
+  tmux send -t $session:dnsmasq.1 "journalctl -e -u dnsmasq.service -f" ENTER
+
+  tmux new-window -t $session:2 -n "hostapd"
+  tmux split-pane -t $session:hostapd.0 -h
+  tmux split-pane -t $session:hostapd.0 -v
+  tmux send -t $session:hostapd.0 'IFACE1=wlan0 IFACE2=eth0; toggle-routing on $IFACE1 $IFACE2'
+  tmux send -t $session:hostapd.1 'toggle-hostapd-ap on'
+  tmux send -t $session:hostapd.2 "journalctl -e -u hostapd.service -f" ENTER
+
+  tmux new-window -t $session:3 -n "netplan"
+  tmux split-pane -t $session:netplan.0 -h
+  tmux resize-pane -t $session:netplan.1 -x $WR
+  tmux send -t $session:netplan.0 "netplan-reload"
+  tmux send -t $session:netplan.1 "dmesg -w" ENTER
+
+  # Handle both cases when tmux is already launched, or not
+  if [[ ! "$TMUX" ]]; then
+    tmux attach-session -t $session:main.0
+  else
+    tmux switch -t $session:main.0
+  fi
+}
+
+export -f tb-network-pane
+tb-network-pane

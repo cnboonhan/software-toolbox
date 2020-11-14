@@ -6,6 +6,7 @@ DOTFILES_DIR=$SCRIPT_DIR/../dotfiles
 
 sudo apt update 
 
+echo "Installing apt dependencies."
 sudo apt install cmake -y
 sudo apt install curl wget -y
 sudo apt install git -y
@@ -18,9 +19,11 @@ sudo apt install exuberant-ctags -y
 sudo apt install ipython3 -y
 sudo apt install openssh-server -y
 sudo apt install software-properties-common -y
-sudo apt-get install clang* -y
-sudo apt-get install libclang*-dev -y
-sudo apt-get install llvm* llvm-dev* -y
+sudo apt install clang -y
+sudo apt install clang-9 -y
+sudo apt install libclang-9-dev -y
+sudo apt install libclang-dev -y
+sudo apt install llvm-9 llvm-9-dev -y
 sudo apt install build-essential -y
 sudo apt install pv -y
 sudo apt install python3-setuptools -y
@@ -28,28 +31,24 @@ sudo apt install htop -y
 sudo apt install time -y
 sudo apt install lsof -y
 sudo apt install bd -y
+sudo apt install gdb gdb-multiarch -y
 sudo apt install chrony -y
 sudo apt install bear -y
-sudo apt install xfce4 -y
-sudo snap install usb-reset
+sudo apt install xdotool -y
+sudo apt install w3m -y
+sudo apt install ripgrep -y
 
-sudo snap connect usb-reset:hardware-observe core:hardware-observe
-sudo snap connect usb-reset:raw-usb core:raw-usb
+echo "Installing snap dependencies."
+sudo snap install shfmt
 
 sudo apt update 
 
-# see udev in dmesg / syslog
-sudo udevadm control --log-priority=info
+echo "Installing source buids."
 
-# Install ripgrep
-sudo apt install ripgrep -y
-
-# Install FZF
 [ -d "$HOME/.fzf" ] && yes | rm -r $HOME/.fzf 
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 yes | $HOME/.fzf/install
 
-# Install CCLS
 [ -d "$HOME/ccls" ] && yes | rm -r $HOME/ccls
 git clone --depth=1 --recursive https://github.com/MaskRay/ccls $HOME/ccls
 cd $HOME/ccls
@@ -59,6 +58,7 @@ sudo cmake --build Release --target install
 cd $HOME 
 yes | rm -r $HOME/ccls
 
+echo "Installing dedicated components."
 $SCRIPT_DIR/vim-install
 $SCRIPT_DIR/tmux-install
 $SCRIPT_DIR/tools-install
@@ -67,4 +67,3 @@ cp $DOTFILES_DIR/.bashrc $HOME
 
 $SCRIPT_DIR/dotfiles-install # Do this again to make sure dotfiles are propagated
 source $HOME/.bashrc
-sudo apt upgrade -y
