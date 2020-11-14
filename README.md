@@ -18,7 +18,7 @@ Easily modifiable and well commented [templates](config) for various Linux admin
 Feature packed configurations: 
 * [vim](https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.vimrc)
 * [tmux](https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.tmux.conf)
-* YoucompleteMe(https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.ycm_extra_conf.py)
+* [YoucompleteMe](https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.ycm_extra_conf.py)
 * [.bashrc](https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.bashrc)
 
 Useful [scripts](tools) to configure:
