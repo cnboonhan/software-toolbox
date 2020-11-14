@@ -39,6 +39,7 @@ sudo apt install w3m -y
 sudo apt install ripgrep -y
 
 echo "Installing snap dependencies."
+sudo apt install snapd
 sudo snap install usb-reset
 sudo snap install shfmt
 sudo snap connect usb-reset:hardware-observe core:hardware-observe
