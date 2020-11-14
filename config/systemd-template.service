@@ -1,6 +1,5 @@
 [Unit]
 # https://www.freedesktop.org/software/systemd/man/systemd.unit.html#
-# Information not specifically related to the type of the unit
 
 # Text description
 Description=Template for a systemd service 
