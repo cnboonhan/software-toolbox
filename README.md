@@ -1,5 +1,5 @@
 # software-toolbox
-Cut down development time with this software bag-o-tricks!
+Cut down development / troubleshooting time with this software bag-o-tricks!
 
 Especially useful for multi device headless setups.
 
