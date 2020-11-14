@@ -1,36 +1,44 @@
 # software-toolbox
 Cut down development / troubleshooting time with this software bag-o-tricks!
 
-Especially useful for multi device headless setups.
+Especially useful for multi device headless setups. Includes:
 
-Contains easily modifiable [templates](config) and [configurations](dotfiles) for
-* Netplan
-* CMake
-* DHCP Server ( dnsmasq )
-* WiFi Hotspot ( hostapd )
-* Tmux ( windows and panes )
-* Vim
-* udev
-* systemd
+Automatic installation of various useful software, such as [general development](https://github.com/cnboonhan/software-toolbox/blob/master/setup/dev-install), [code editing](https://github.com/cnboonhan/software-toolbox/blob/master/setup/vim-install) and [network troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/setup/network-tools-install), [docker](https://github.com/cnboonhan/software-toolbox/tree/master/setup) and [nodeJS](https://github.com/cnboonhan/software-toolbox/blob/master/setup/node-install).
+
+Easily modifiable and well commented [templates](config) for various Linux administration files
+* [Netplan](https://github.com/cnboonhan/software-toolbox/blob/master/config/01-netplan-config.yaml)
+* [CMake](https://github.com/cnboonhan/software-toolbox/blob/master/config/CMakeLists.txt)
+* [DHCP Server ( dnsmasq )](https://github.com/cnboonhan/software-toolbox/blob/master/config/dnsmasq.conf)
+* [WiFi Hotspot ( hostapd )](https://github.com/cnboonhan/software-toolbox/blob/master/config/hostapd.conf)
+* [Tmux Scripting](https://github.com/cnboonhan/software-toolbox/blob/master/config/tmux-template)
+* [udev](https://github.com/cnboonhan/software-toolbox/blob/master/config/udev-trigger-script.rules)
+* [systemd](https://github.com/cnboonhan/software-toolbox/blob/master/config/systemd-template.service)
 * YouCompleteMe ( Vim )
-* bashrc
 
-Contains useful [scripts](tools) to configure:
-* Automatic login on startup
-* Graphical interface / terminal on startup 
-* WiFi power management under NetworkManager
-* Netplan 
-* Packet forwarding between two network interfaces
-* Adding / Removing temporary swap space ( in case of insufficient RAM )
-* Trigger commands on file/folder modifications
-* Mount remote devices locally over SSH
+Feature packed configurations: 
+* [vim](https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.vimrc)
+* [tmux](https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.tmux.conf)
+* YoucompleteMe(https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.ycm_extra_conf.py)
+* [.bashrc](https://github.com/cnboonhan/software-toolbox/blob/master/dotfiles/.bashrc)
+
+Useful [scripts](tools) to configure:
+* [Automatic login on startup](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-autologin)
+* [Graphical interface / terminal on startup](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-boot-interface)
+* [WiFi power management under NetworkManager](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-power-management)
+* [Netplan](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-netplan) 
+* [Packet forwarding between two network interfaces](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-interface-forwarding)
+* [Adding / Removing temporary swap space ( in case of insufficient RAM )](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-temp-swap-space)
+* [Trigger commands on file/folder modifications: Useful for triggering automatic rebuilds on save](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-run-cmd-on-update)
+* [Mount remote devices locally over SSH](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-sshfs-mount)
+* [VNC Server for remote desktop access](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-toggle-vnc-server-on-startup)
 
 As well as various tmux configurations for easier development for
-* Bluetooth
-* Git
-* Systemd services
-* Udev 
-* Network Troubleshooting
+* [Bluetooth](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-bluetooth-pane)
+* [Git](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-git-pane)
+* [Systemd](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-systemd-pane) 
+* [Udev](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-udev-pane) 
+* [Network Troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-network-pane)
+* [General Troubleshooting](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-monitor-pane)
 
 ## Quick Setup 
 Note that running `dev-install` will overwrite certain [configuration files](dotfiles). Make sure to back them up!
