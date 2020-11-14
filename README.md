@@ -29,7 +29,7 @@ Feature packed [configurations](https://github.com/cnboonhan/software-toolbox/tr
 
 Useful [scripts](tools) to configure:
 * [Automatic login on startup](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-autologin)
-* [Graphical interface / terminal on startup](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-boot-interface)
+* [Whether to launch Graphical Interface ( X Server ) on startup](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-boot-interface)
 * [WiFi power management under NetworkManager](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-power-management)
 * [Netplan](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-netplan) 
 * [Packet forwarding between two network interfaces](https://github.com/cnboonhan/software-toolbox/blob/master/tools/tb-conf-interface-forwarding)
