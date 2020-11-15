@@ -43,6 +43,7 @@ sudo apt install ripgrep -y
 
 echo "Installing snap dependencies."
 sudo apt install snapd -y
+systemctl start snapd.service
 sudo snap install shfmt
 
 sudo apt update 
