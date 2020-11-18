@@ -12,3 +12,4 @@ cp $CONFIG_DIR/dummy-1920-1080.conf ~/.dummy-1920-1080.conf
 
 echo "Start with the following command:"
 echo "sudo X :[DISPLAY] -config $HOME/.dummy-1920x1080.conf"
+echo "or copy $HOME/.dummy-1920x1080.conf to /etc/X11/xorg.conf and reboot"
