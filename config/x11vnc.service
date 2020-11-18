@@ -3,9 +3,15 @@ Description="x11vnc"
 Requires=display-manager.service
 After=display-manager.service
 
+StartLimitIntervalSec=12
+StartLimitBurst=3
+
 [Service]
 User=ubuntu
 WorkingDirectory=/home/ubuntu
+
+TimeoutStartSec=infinity
+TimeoutStopSec=infinity
 
 ExecStart=/usr/bin/x11vnc -xkb -noxrecord -ncache 10 -noxfixes -noxdamage -display :0 -auth guess -rfbauth .x11vnc.pass
 ExecStop=/usr/bin/killall x11vnc
