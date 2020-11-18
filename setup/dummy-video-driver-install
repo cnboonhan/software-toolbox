@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e 
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+CONFIG_DIR=$SCRIPT_DIR/../config
+
+echo "Sets up a dummy video driver for headless VNC Servers."
+
+sudo apt install xserver-xorg-video-dummy -y
+
+cp $CONFIG_DIR/dummy-1920-1080.conf ~/.dummy-1920-1080.conf
+
+echo "Start with the following command:"
+echo "sudo X :[DISPLAY] -config $HOME/.dummy-1920x1080.conf"
