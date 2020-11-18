@@ -8,7 +8,7 @@ echo "Installing X11VNC Server for Gnome Environments"
 sudo apt install x11vnc -y
 
 echo "Set no password for the VNC Server"
-sudo x11vnc -storepasswd "" /etc/x11vnc.pass
+x11vnc -storepasswd "" $HOME/.x11vnc.pass
 
 echo "Adding startup config file for autologin"
 cp $CONFIG_DIR/xstartup ~/.vnc/
@@ -26,7 +26,7 @@ sudo systemctl start x11vnc.service
 echo "X11VNC should be available now."
 
 echo "To set x11vnc password:"
-echo "sudo x11vnc -storepasswd [yourpassword] /etc/x11vnc.pass"
+echo "x11vnc -storepasswd [yourpassword] $HOME/.x11vnc.pass"
 sleep 1
 
 echo "If using Raspberry Pi, edit config.txt with the following."
