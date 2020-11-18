@@ -2,8 +2,7 @@
 Description=Starts up Remote desktop service (VNC) on Boot
 After=syslog.target network.target
 
-StartLimitIntervalSec=12
-StartLimitBurst=3
+StartLimitIntervalSec=0
 
 [Service]
 Type=forking
@@ -16,7 +15,7 @@ TimeoutStopSec=infinity
 # Clean any existing files in /tmp/.X11-unix environment
 ExecStart=/usr/bin/sh -c "sleep 5 && /usr/bin/x0vncserver -passwordfile /home/ubuntu/.vnc/passwd -display :0 &"
 Restart=always
-RestartSec=3
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
