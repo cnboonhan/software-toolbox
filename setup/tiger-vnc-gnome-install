@@ -4,7 +4,7 @@ set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 CONFIG_DIR=$SCRIPT_DIR/../config
 
-echo "Installing VNC Server for Gnome Environments"
+echo "Installing TigerVNC Server for Gnome Environments"
 sudo apt install tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer -y
 sudo apt install tigervnc-scraping-server -y
 
