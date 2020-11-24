@@ -40,6 +40,7 @@ sudo apt install bear -y
 sudo apt install xdotool -y
 sudo apt install w3m -y
 sudo apt install ripgrep -y
+sudo apt install python3-venv -y
 
 echo "Installing snap dependencies."
 sudo apt install snapd -y
