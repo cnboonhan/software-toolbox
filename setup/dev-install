@@ -41,12 +41,7 @@ sudo apt install xdotool -y
 sudo apt install w3m -y
 sudo apt install ripgrep -y
 sudo apt install python3-venv -y
-
-echo "Installing snap dependencies."
-sudo apt install snapd -y
-sudo systemctl start snapd.service
-sudo snap install shfmt
-
+sudo apt install i3 -y
 
 echo "Installing pip3 dependencies."
 pip3 install wheel
