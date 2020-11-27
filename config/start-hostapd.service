@@ -1,5 +1,7 @@
 [Unit]
 Description=Keep Hostapd Alive
+
+[Service]
 Type=simple
 ExecStart=systemctl start hostapd.service
 Restart=always
