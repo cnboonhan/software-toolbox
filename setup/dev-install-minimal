@@ -42,11 +42,6 @@ sudo apt install w3m -y
 sudo apt install ripgrep -y
 sudo apt install python3-venv -y
 
-echo "Installing snap dependencies."
-sudo apt install snapd -y
-systemctl start snapd.service
-sudo snap install shfmt
-
 sudo apt update 
 
 echo "Installing source buids."
