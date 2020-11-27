@@ -43,6 +43,9 @@ sudo apt install ripgrep -y
 sudo apt install python3-venv -y
 sudo apt install i3 -y
 
+echo "Installing rustup."
+curl https://sh.rustup.rs -sSf | sh -s -- -y
+
 echo "Installing pip3 dependencies."
 pip3 install wheel
 pip3 install gdbgui

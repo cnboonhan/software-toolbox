@@ -41,3 +41,7 @@ cp $SCRIPT_DIR/../dotfiles/.minimal_vimrc $HOME/.vimrc
 /usr/bin/vim -c ':PlugInstall' -c ':qall' 
 cp $SCRIPT_DIR/../dotfiles/.vimrc $HOME
 echo "vim plugins complete"
+
+echo "Installing Vim Completers"
+cd $HOME/.vim/plugged/YouCompleteMe
+python3 install.py --clang-completer --rust-completer
