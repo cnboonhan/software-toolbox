@@ -1,5 +1,5 @@
 [Unit]
-Description=Keep Hostapd Alive
+Description=Restores hostapd if down
 
 [Service]
 Type=simple
