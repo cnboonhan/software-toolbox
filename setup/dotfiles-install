@@ -13,3 +13,4 @@ cp $DOTFILES_DIR/.tmux.conf $HOME
 cp $DOTFILES_DIR/.bashrc $HOME
 cp $DOTFILES_DIR/.bashrc_definitions $HOME
 cp $DOTFILES_DIR/.bashrc_functions $HOME
+cp $DOTFILES_DIR/.rustfmt.toml $HOME
