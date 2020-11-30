@@ -20,14 +20,14 @@ map Q <Nop>
 """ PLUGINS 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } 
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --rust-completer' } 
 Plug 'kassio/neoterm'
 Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-fugitive'
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/denite.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'morhetz/gruvbox'
