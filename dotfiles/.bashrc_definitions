@@ -37,3 +37,6 @@ alias ssh="ssh -X"
 
 ## Always colorize git output
 git config --global color.status always
+
+## For situations when vim is slow because of disabled X-server
+alias vim="vim -X"
