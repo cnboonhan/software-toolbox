@@ -34,7 +34,6 @@ Plug 'morhetz/gruvbox'
 Plug 'puremourning/vimspector'
 Plug 'w0rp/ale'
 Plug 'vim-scripts/a.vim'
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 call plug#end()
 
 " Get paths of current file in buffer
