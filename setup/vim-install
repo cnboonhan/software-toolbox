@@ -8,7 +8,7 @@ echo "Installing Vim"
 sudo apt update 
 
 cd /tmp && git clone https://github.com/vim/vim.git && cd /tmp/vim
-./configure --enable-pythoninterp --prefix=/usr
+./configure --enable-python3interp --prefix=/usr/local --with-python3-config-dir=/usr/lib/python3.6/config-*
 make
 sudo make install
 
