@@ -7,10 +7,6 @@ DOTFILES_DIR=$SCRIPT_DIR/../dotfiles
 echo "Installing Vim"
 sudo apt update 
 
-echo "adding ppas and update"
-sudo add-apt-repository ppa:jonathonf/vim -y
-sudo apt update 
-
 echo "installing apt dependencies"
 sudo apt install vim -y
 sudo apt install default-jdk -y
