@@ -24,9 +24,10 @@ sudo apt install openssh-server -y
 sudo apt install software-properties-common -y
 sudo apt install clang -y
 sudo apt install clang-9 -y
+sudo apt install libclang-7-dev -y
+sudo apt install libclang-8-dev -y
 sudo apt install libclang-9-dev -y
 sudo apt install libclang-dev -y
-sudo apt install llvm-8 llvm-8-dev -y
 sudo apt install llvm-9 llvm-9-dev -y
 sudo apt install build-essential -y
 sudo apt install pv -y
