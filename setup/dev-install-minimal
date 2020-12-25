@@ -53,7 +53,7 @@ yes | $HOME/.fzf/install
 [ -d "$HOME/ccls" ] && yes | rm -r $HOME/ccls
 git clone --depth=1 --recursive https://github.com/MaskRay/ccls $HOME/ccls
 cd $HOME/ccls
-cmake -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/bin
+cmake -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/bin -DCMAKE_CXX_LINK_FLAGS=-latomic
 cmake --build Release
 sudo cmake --build Release --target install
 cd $HOME 
