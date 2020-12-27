@@ -13,6 +13,7 @@ set relativenumber
 set clipboard=unnamedplus " Use the system clipboard for yanking
 set foldmethod=indent
 set nofoldenable
+set backspace=indent,eol,start
 
 let g:rust_recommended_style = 0
 map Q <Nop>
