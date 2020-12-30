@@ -44,6 +44,7 @@ sudo apt install w3m -y
 sudo apt install ripgrep -y
 sudo apt install python3-venv -y
 sudo apt install i3 -y
+sudo apt install xterm -y
 
 echo "Installing rustup."
 curl https://sh.rustup.rs -sSf | sh -s -- -y
