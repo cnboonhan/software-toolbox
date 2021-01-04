@@ -16,6 +16,8 @@ set nofoldenable
 set backspace=indent,eol,start
 
 let g:rust_recommended_style = 0
+let g:python_recommended_style = 0
+
 map Q <Nop>
 
 """ PLUGINS 
