@@ -3,6 +3,7 @@ DEVICE_NAME=/dev/ttyUSB0
 FIRMWARE_LINK=https://micropython.org/resources/firmware/esp32-idf3-20210129-unstable-v1.13-291-gd1f120b14.bin
 
 pip3 install esptool
+pip3 install adafruit-ampy
 tbin=$(mktemp)
 wget $FIRMWARE_LINK -O $tbin
 esptool.py --chip esp32 --port $DEVICE_NAME erase_flash
