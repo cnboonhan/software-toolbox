@@ -59,7 +59,7 @@ colorscheme gruvbox
 autocmd VimLeave * call system('echo ' . shellescape(getreg('+')) . 
             \ ' | xclip -selection clipboard')
 
-# Workaround for vim clipboard copying in ubuntu 20.04
+" Workaround for vim clipboard copying in ubuntu 20.04
 xnoremap "+y y:call system('echo ' . shellescape(getreg('+')) .
             \ ' \| xclip -selection clipboard')<cr>
 
