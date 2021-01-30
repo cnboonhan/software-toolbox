@@ -21,8 +21,8 @@ esptool.py --chip esp32 --port $DEVICE_NAME --baud 460800 write_flash -z 0x1000 
 
 #echo "Flashing template files"
 #sleep 2
-#ampy --port $DEVICE_NAME put $(dirname $0)/boot.py
-#ampy --port $DEVICE_NAME put $(dirname $0)/main.py
-
+#for filename in $(dirname $0)/*.py; do
+  #ampy --port $DEVICE_NAME put  $filename
+#done
 
 
