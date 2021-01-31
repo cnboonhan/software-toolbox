@@ -1,6 +1,6 @@
 #!/bin/bash
 DEVICE_NAME=/dev/ttyUSB0
-FIRMWARE_LINK=https://micropython.org/resources/firmware/esp32-idf3-20210129-unstable-v1.13-291-gd1f120b14.bin
+FIRMWARE_LINK=https://micropython.org/resources/firmware/esp32-idf4-20200902-v1.13.bin
 
 pip3 install esptool
 tbin=$(mktemp)
