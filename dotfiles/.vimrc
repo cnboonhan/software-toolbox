@@ -59,6 +59,10 @@ colorscheme gruvbox
 autocmd VimLeave * call system('echo ' . shellescape(getreg('+')) . 
             \ ' | xclip -selection clipboard')
 
+" Workaround for vim clipboard copying in ubuntu 20.04
+xnoremap "+y y:call system('echo ' . shellescape(getreg('+')) .
+            \ ' \| xclip -selection clipboard')<cr>
+
 " Shortcut to allow deleting without copying to clipboard
 nnoremap <space>d "_d
 xnoremap <space>d "_d

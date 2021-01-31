@@ -2,13 +2,27 @@
 DEVICE_NAME=/dev/ttyUSB0
 FIRMWARE_LINK=https://micropython.org/resources/firmware/esp32-idf4-20200902-v1.13.bin
 
+if [ -n "$1" ]
+then
+  DEVICE_NAME=$1
+fi
+
+echo "Install dependencies"
 pip3 install esptool
+pip3 install adafruit-ampy
+
+echo "Downloading firmware"
 tbin=$(mktemp)
 wget $FIRMWARE_LINK -O $tbin
-esptool.py --chip esp32 --port $DEVICE_NAME erase_flash
-esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 write_flash -z 0x1000 $tbin
 
-sleep 3
-tmain=$(mktemp)
-echo 'hello world' > $tmain
-ampy --port $DEVICE_NAME put $tmain
+echo "Flashing firmware"
+esptool.py --chip esp32 --port $DEVICE_NAME erase_flash
+esptool.py --chip esp32 --port $DEVICE_NAME --baud 460800 write_flash -z 0x1000 $tbin
+
+#echo "Flashing template files"
+#sleep 2
+#for filename in $(dirname $0)/*.py; do
+  #ampy --port $DEVICE_NAME put  $filename
+#done
+
+
