@@ -1,4 +1,5 @@
 """ SETTINGS
+set nocompatible
 let mapleader=","
 set hidden  "  Hides buffers instead of closing them
 set wildmenu " An navigable menu will appear on entering <Tab> after :command
