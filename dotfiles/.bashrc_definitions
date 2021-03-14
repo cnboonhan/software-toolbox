@@ -40,3 +40,6 @@ git config --global color.status always
 
 ## For situations when vim is slow because of disabled X-server
 alias vim="vim -X"
+
+## Make ls show file sizes by default
+alias ls="ls -lh --color=auto"
